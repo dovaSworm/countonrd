@@ -1,0 +1,1 @@
+SELECT invoices.date, invoices.total, invoices.inv_num, invoices.currency, invoices.pay_deadline, invoices.discount, c.name as byername, c.pib as byerpib, c2.name as sellername, c2.pib sellerpib FROM invoices INNER JOIN companies c ON c.name = invoices.byer INNER JOIN companies c2 ON c2.name = invoices.seller where invoices.id = '257';

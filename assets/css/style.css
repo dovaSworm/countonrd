@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+body {
+    -webkit-font-smoothing: antialiased;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+    margin: 0;
+    /* background: url(../img/white1.jpg) repeat; */
+}
+
+a {
+    color: inherit;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+button#edit-invoice {
+    color: #28a745;
+}
+
+nav a:hover {
+    text-decoration: none;
+    color: rgb(175, 225, 245);
+}
+
+button.my-3 a:hover,
+button#edit-invoice:hover {
+    color: rgb(23, 141, 252);
+}
+
+.dropdown-menu {
+    margin-top: 10px;
+    background: #343a40;
+    color: white;
+}
+
+.dropdown-item {
+    color: inherit;
+}
+
+
+/* button.my-3:hover a {
+    height: 100%;
+    background: green;
+    color: rgb(255, 46, 46);
+} */
+
+nav li>a,
+.dropdown>a {
+    color: white;
+    text-transform: uppercase;
+}
+
+.dropdown>a {
+    margin-left: 5px;
+}
+
+.dropdown-menu {
+    border-radius: 0;
+}
+
+.row div>a {
+    color: inherit;
+}
+
+.row div>a:hover {
+    font-weight: bold;
+}
+
+label {
+    /* width: 150px!important; */
+    margin-right: 1rem;
+    justify-content: left!important;
+}
+
+div.form-inline.my-2 label {
+    width: 30%;
+}
+
+table.table.table-borderless td {
+    padding: 5px;
+}
+
+table.table-striped thead th {
+    border: none!important;
+}
+
+caption {
+    font-size: 1.2rem;
+    font-weight: bold!important;
+}
+
+.my-table {
+    margin-bottom: 50px;
+    border: 1px solid black;
+}
+
+div.row.d-flex>div.col-sm-12.col-md-4 {
+    border-bottom: 1px solid black;
+    /* background-color: red; */
+    /* height: 3px; */
+    /* width: 110px; */
+    padding: 70px;
+    margin: 30px;
+    margin-bottom: 60px;
+}
+
+.btn-secondary {
+    padding: 7px;
+    border: 1px solid white;
+    background: transparent!important;
+    color: white;
+}
+
+.btn-secondary:hover {
+    color: rgb(184, 184, 184);
+}
+
+.mybutton {
+    border: 1px solid black;
+    color: white;
+    background: #343a40;
+}
+
+.mybutton:hover {
+    color: rgb(110, 161, 170);
+}
+
+button.edit-item,
+button.delete-item {
+    background: transparent;
+    border: none;
+}
+
+button.edit-item a:hover,
+button.edit-item:hover {
+    color: deepskyblue;
+}
+
+button.delete-item a:hover,
+button.delete-item:hover {
+    color: red;
+}
+
+th {
+    font-size: 16px!important;
+    /* border: none!important; */
+}
+
+
+/* .btn-secondary:hover {
+    border: 1px solid gray;
+} */
+
+div>img {
+    width: 60px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.mytitle {
+    display: block;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px;
+    border-bottom: 1px solid gray;
+}
