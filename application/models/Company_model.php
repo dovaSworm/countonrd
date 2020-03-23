@@ -43,13 +43,17 @@ class Company_model extends CI_Model
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
 
         $data = array(
-            'id' => $this->input->post('id'),
             'name' => $this->input->post('name'),
             'pib' => $this->input->post('pib'),
             'mb' => $this->input->post('mb'),
             'adress' => $this->input->post('adress'),
-            'email' => $this->input->post('email'),
-            'account_num' => $this->input->post('account-num'),
+            'city' => $this->input->post('city'),
+            'zip_code' => $this->input->post('zip-code'),
+            'email' => !empty($this->input->post('email')) ? $this->input->post('email') : "",
+            'phone' => !empty($this->input->post('phone')) ? $this->input->post('phone') : "",
+            'bank' => !empty($this->input->post('bank')) ? $this->input->post('bank') : "",
+            'account_num' => !empty($this->input->post('account-num')) ? $this->input->post('account-num') : "",
+            'contact' => !empty($this->input->post('contact')) ? $this->input->post('contact') : ""
         );
 
         $this->db->where('id', $this->input->post('id'));

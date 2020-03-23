@@ -65,11 +65,11 @@
             $this->form_validation->set_rules('inv-num', 'Inovice number', 'required|numeric');
             $this->form_validation->set_rules('date', 'Date', 'trim|required');
             $this->form_validation->set_rules('seller', 'Seller', 'trim|required');
-            $this->form_validation->set_rules('byer', 'Byer', 'trim|required');
-            $this->form_validation->set_rules('currency', 'Currency', 'trim|numeric');
+            $this->form_validation->set_rules('buyer', 'Buyer', 'trim|required');
+            $this->form_validation->set_rules('currency', 'Currency', 'trim');
             $this->form_validation->set_rules('discount', 'Discount', 'trim|numeric');
-            $this->form_validation->set_rules('pay-deadline', 'Payment deadline', 'trim|required');
-            $this->form_validation->set_rules('total', 'Total cost', 'trim|numeric');
+            $this->form_validation->set_rules('pay-deadline', 'Payment deadline', 'trim');
+            $this->form_validation->set_rules('total', 'Total cost', 'trim');
             $date = date_create_from_format("Y-m-d", $this->input->post('date'))->format("Y-m-d");
             $inv_num = date_create_from_format("Y-m-d", $this->input->post('date'))->format("Ymd") . "/" .  $this->input->post('inv-num');
             $pay_deadline = date_add(date_create_from_format("Y-m-d", $this->input->post('date')),date_interval_create_from_date_string($this->input->post('pay-deadline') . " days"))->format("Y-m-d");
@@ -81,7 +81,7 @@
                 'inv_num' => $inv_num,
                 'date' =>  $date,
                 'seller' => $this->input->post('seller'),
-                'byer' => $this->input->post('byer'),
+                'buyer' => $this->input->post('buyer'),
                 'currency' => $this->input->post('currency'),
                 'discount' => $this->input->post('discount'),
                 'pay_deadline' => $pay_deadline,

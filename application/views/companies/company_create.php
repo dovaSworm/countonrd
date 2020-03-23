@@ -16,9 +16,6 @@
         
         <?php  if(form_error('name')) echo '<div class="alert alert-warning">' . form_error('name'). '</div>'; ?> 
     </div>
-    <small id="nameHelp" class="form-text text-muted">
-    Naziv može da sadrži slova, brojeve, razmak i crtice - _.
-    </small>
     <div class="form-inline my-2">
         <label>PIB</label>
         <input type="text" name="pib" class="form-control" placeholder="PIB broj kompanije" value="<?php echo set_value('pib', ''); ?>">

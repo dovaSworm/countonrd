@@ -31,6 +31,16 @@
         <input type="text" name="adress" class="form-control" placeholder="Adresa kompanije" value="<?php echo $company['adress']; ?>">
     </div>
     <div class="form-inline my-2">
+        <label>Poštanski broj</label>
+        <?php  if(form_error('zip-code')) echo '<div class="alert alert-warning">' . form_error('zip-code'). '</div>'; ?>
+        <input type="text" name="zip-code" class="form-control" value="<?php echo set_value('zip_code', ''); ?>">
+    </div>
+    <div class="form-inline my-2">
+        <label>Grad</label>
+        <?php  if(form_error('city')) echo '<div class="alert alert-warning">' . form_error('city'). '</div>'; ?>
+        <input type="text" name="city" class="form-control" value="<?php echo set_value('city', ''); ?>">
+    </div>
+    <div class="form-inline my-2">
         <label>Email</label>
         <?php  if(form_error('email')) echo '<div class="alert alert-warning">' . form_error('email'). '</div>'; ?>
         <input type="email" name="email" class="form-control" placeholder="Unesite email kompanije" value="<?php echo $company['email']; ?>">

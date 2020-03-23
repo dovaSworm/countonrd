@@ -5,8 +5,9 @@
     }    
 ?>
 <div class="mytitle">
-    <img src="<?php echo base_url().'/assets/img/logo.png' ;?>" alt="">
     <h2 class="text-center my-3">COUNTONRD</h2>
+    <img  src="<?php echo base_url().'/assets/img/sivibek.svg' ;?>" alt="">  
+    <p class="text-center">Vaše rešenje za vođenje stanja magacina i izradu faktura</p>
     <h4 class="text-center mb-3">Dobrodošli</h4>
 </div>
 

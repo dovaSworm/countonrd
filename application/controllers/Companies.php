@@ -19,8 +19,6 @@ class Companies extends CI_Controller
 
         $naslov['title'] = 'Edit';
         $data['company'] = $this->company_model->get_one($id);
-        // $data['categories'] = $this->product_model->get_categories();
-
         if (empty($data['company'])) {
             show_404();
         }
@@ -33,13 +31,30 @@ class Companies extends CI_Controller
 
     public function update()
     {
-        $this->form_validation->set_rules('name', 'Name', 'trim|required|');
+        $this->form_validation->set_rules('name', 'Name', 'trim|required');
         $this->form_validation->set_rules('pib', 'PIB', 'trim|required|numeric|min_length[9]|max_length[9]');
         $this->form_validation->set_rules('mb', 'MB', 'trim|required|numeric|min_length[8]|max_length[8]');
         $this->form_validation->set_rules('adress', 'Adress', 'trim|required');
+        $this->form_validation->set_rules('city', 'City', 'trim|required');
+        $this->form_validation->set_rules('zip-code', 'zip-code', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim');
-        $this->form_validation->set_rules('account-num', 'Account number', 'trim|numeric');
+        $this->form_validation->set_rules('account-num', 'Account number', 'trim');
+        $this->form_validation->set_rules('bank', 'Bank', 'trim');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim');
         $this->form_validation->set_rules('contact', 'Contact person', 'trim');
+        // $data = array(
+        //     'name' => $this->input->post('name'),
+        //     'pib' => $this->input->post('pib'),
+        //     'mb' => $this->input->post('mb'),
+        //     'adress' => $this->input->post('adress'),
+        //     'city' => $this->input->post('city'),
+        //     'zip_code' => $this->input->post('zip-code'),
+        //     'email' => !empty($this->input->post('email')) ? $this->input->post('email') : "",
+        //     'phone' => !empty($this->input->post('phone')) ? $this->input->post('phone') : "",
+        //     'bank' => !empty($this->input->post('bank')) ? $this->input->post('bank') : "",
+        //     'account_num' => !empty($this->input->post('account-num')) ? $this->input->post('account-num') : "",
+        //     'contact' => !empty($this->input->post('contact')) ? $this->input->post('contact') : ""
+        // );
         // $varijabla = $this->company_model->update_company();
         if(!empty($this->company_model->update_company())){
             $this->session->set_flashdata('company_edited', 'Kompanija uspesno  izmenjena');
@@ -47,7 +62,6 @@ class Companies extends CI_Controller
         }else{
             $this->db->display_errors();
         }
-        
     }
 
     public function delete($id)
@@ -57,39 +71,31 @@ class Companies extends CI_Controller
         redirect('home');
     }
 
-    public function name_check($str)
-    {
-        if (preg_match('/^[a-zA-Z0-9-_. ]*$/', $str) === 1) {
-
-            return true;
-        } else {
-            $this->form_validation->set_message('name_check', 'Možete koristiti samo slova, brojeve, razmak, srednju i donju crtu.');
-            return false;
-        }
-    }
-
     public function create()
     {
-        $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_check');
+        $this->form_validation->set_rules('name', 'Name', 'trim|required');
         $this->form_validation->set_rules('pib', 'PIB', 'trim|required|numeric|min_length[9]|max_length[9]');
         $this->form_validation->set_rules('mb', 'MB', 'trim|required|numeric|min_length[8]|max_length[8]');
         $this->form_validation->set_rules('adress', 'Adress', 'trim|required');
+        $this->form_validation->set_rules('city', 'City', 'trim|required');
+        $this->form_validation->set_rules('zip-code', 'zip-code', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim');
-        $this->form_validation->set_rules('account-num', 'Account number', 'trim|numeric');
+        $this->form_validation->set_rules('account-num', 'Account number', 'trim');
         $this->form_validation->set_rules('bank', 'Bank', 'trim');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim');
         $this->form_validation->set_rules('contact', 'Contact person', 'trim');
         $data = array(
             'name' => $this->input->post('name'),
             'pib' => $this->input->post('pib'),
             'mb' => $this->input->post('mb'),
             'adress' => $this->input->post('adress'),
-            'email' => $this->input->post('email'),
-            'bank' => $this->input->post('bank'),
             'city' => $this->input->post('city'),
-            'phone' => $this->input->post('phone'),
             'zip_code' => $this->input->post('zip-code'),
-            'account_num' => $this->input->post('account-num'),
-            'contact' => $this->input->post('contact')
+            'email' => !empty($this->input->post('email')) ? $this->input->post('email') : "",
+            'phone' => !empty($this->input->post('phone')) ? $this->input->post('phone') : "",
+            'bank' => !empty($this->input->post('bank')) ? $this->input->post('bank') : "",
+            'account_num' => !empty($this->input->post('account-num')) ? $this->input->post('account-num') : "",
+            'contact' => !empty($this->input->post('contact')) ? $this->input->post('contact') : ""
         );
 
         if ($this->form_validation->run() === false) {
