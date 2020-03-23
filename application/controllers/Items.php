@@ -26,13 +26,12 @@
 
             $this->form_validation->set_rules('group-id', 'Group id', 'required|numeric');
             $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_check|is_unique[items.name]');
-            $this->form_validation->set_rules('code', 'Code', 'trim|required|numeric');
             $this->form_validation->set_rules('tax', 'Tax', 'trim|numeric');
             $this->form_validation->set_rules('quantity', 'Quantity', 'trim|numeric');
             $this->form_validation->set_rules('description', 'Description', 'trim|required|callback_name_check');
             $this->form_validation->set_rules('buying-price', 'Buying price', 'trim|numeric');
             $this->form_validation->set_rules('selling-price', 'Selling price', 'trim|numeric|required');
-            $this->form_validation->set_rules('sellers-ode', 'Sellers code', 'trim|numeric');
+            $this->form_validation->set_rules('sellers-code', 'Sellers code', 'trim');
             $this->form_validation->set_rules('sellers-name', 'Sellers name', 'trim|callback_name_check');
             
             $data = array(
@@ -40,11 +39,11 @@
                 'name' => $this->input->post('name'),
                 'code' => $this->input->post('code'),
                 'tax' => $this->input->post('tax'),
-                'quantity' => $this->input->post('quantity'),
+                'quantity' => 0,
                 'description' => $this->input->post('description'),
                 'buying_price' => $this->input->post('buying-price'),
                 'selling_price' => $this->input->post('selling-price'),
-                'sellers_code' => $this->input->post('sellers-ode'),
+                'sellers_code' => $this->input->post('sellers-code'),
                 'sellers_name' => $this->input->post('sellers-name')
             );
             if($this->form_validation->run() === FALSE){
@@ -79,7 +78,7 @@
     {
         $this->form_validation->set_rules('group-id', 'Group id', 'numeric');
         $this->form_validation->set_rules('name', 'Name', 'trim|callback_name_check|is_unique[items.name]');
-        $this->form_validation->set_rules('code', 'Code', 'trim|numeric');
+        $this->form_validation->set_rules('code', 'Code', 'trim');
         $this->form_validation->set_rules('rate', 'Rate', 'trim|numeric');
         $this->form_validation->set_rules('tax', 'Tax', 'trim|numeric');
         $this->form_validation->set_rules('quantity', 'Quantity', 'trim|numeric');
@@ -87,7 +86,7 @@
         $this->form_validation->set_rules('description', 'Description', 'trim');
         $this->form_validation->set_rules('buying-price', 'Buying price', 'trim|numeric');
         $this->form_validation->set_rules('selling-price', 'Selling price', 'trim|numeric|required');
-        $this->form_validation->set_rules('sellers-code', 'Sellers code', 'trim|numeric');
+        $this->form_validation->set_rules('sellers-code', 'Sellers code', 'trim');
         $this->form_validation->set_rules('sellers-name', 'Sellers name', 'trim|callback_name_check');
 
         $data = array(

@@ -4,9 +4,8 @@
     }    
 ?>
 
-<div class="mytitle">
-    <img src="<?php echo base_url().'/assets/img/logo.png' ;?>" alt="">
-    <h2 class="text-center my-1">COUNTONRD</h2>
+<div class="mytitle">    
+    <h6 class="text-center my-1">CountOn<img src="<?php echo base_url().'/assets/img/sivibek.svg' ;?>" alt=""></h6>
 </div>
 <div class="container d-flex justify-content-center">
     <table class="table table-striped w-auto m-auto">

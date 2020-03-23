@@ -5,12 +5,13 @@
 ?>
 
 <!-- <img src="https://github.com/dovaSworm/front-end/blob/master/Pipboy/img/angry.jpg?raw=true" alt=""> -->
-<br>
-
-<div class="container">
+<div class="container-fluid">
+<div class="mytitle">
+    <h6 class="text-center my-1">CountOn<img src="<?php echo base_url().'/assets/img/sivibek.svg' ;?>" alt=""></h6>
+</div>
     <div class="my-table">
-        <div class="row no-gutters p-4">
-            <div class="col-sm-12 col-md-4">
+        <div class="row no-gutters">
+            <div class="col-sm-12 col-md-4 bg-light p-4">
                 <table class="table table-borderless">
                     <thead>
                         <tr>
@@ -19,33 +20,27 @@
                     </thead>
                     <tbody id="byerId">
                         <tr>
-                            <!-- <td>Company</td> -->
                             <td><?php echo $invoice['sellername']; ?></td>
                         </tr>
                         <tr>
-                            <!-- <td>Pib</td> -->
                             <td><?php echo $invoice['sellerpib']; ?></td>
                         </tr>
                         <tr>
-                            <!-- <td>Adress</td> -->
                             <td><?php echo $invoice['selleradress']; ?></td>
                         </tr>
                         <tr>
-                            <!-- <td>City</td> -->
                             <td><?php echo $invoice['sellercity']; ?></td>
                         </tr>
                         <tr>
-                            <!-- <td>Zip code</td> -->
                             <td><?php echo $invoice['sellerzip']; ?></td>
                         </tr>
                         <tr>
-                            <!-- <td>Zip code</td> -->
                             <td><?php echo $invoice['selleraccount']; ?></td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-sm-12 col-md-4">
+            <div class="col-sm-12 col-md-4 bg-light p-4">
                 <table class="table table-borderless">
                     <thead>
                         <tr>
@@ -54,23 +49,18 @@
                     </thead>
                     <tbody id="byerId">
                         <tr>
-                            <!-- <td>Company</td> -->
                             <td><?php echo $invoice['buyername']; ?></td>
                         </tr>
                         <tr>
-                            <!-- <td>Pib</td> -->
                             <td><?php echo $invoice['buyerpib']; ?></td>
                         </tr>
                         <tr>
-                            <!-- <td>Adress</td> -->
                             <td><?php echo $invoice['buyeradress']; ?></td>
                         </tr>
                         <tr>
-                            <!-- <td>City</td> -->
                             <td><?php echo $invoice['buyercity']; ?></td>
                         </tr>
                         <tr>
-                            <!-- <td>Zip code</td> -->
                             <td><?php echo $invoice['buyerzip']; ?></td>
                         </tr>
                     </tbody>
@@ -79,7 +69,7 @@
 
             <div class="col-sm-12 col-md-4">
                 <?php echo form_open('invoices/update/' . $invoice['id']); ?>
-                <table class="table table-borderless my-4">
+                <table class="table table-borderless m-4">
                     <thead>
                         </thead>
                         <tbody>
@@ -87,14 +77,13 @@
                                     <td>Tip</td>
                                     <?php if ($invoice['avans'] == 1): ?>
         
-                                    <td class="text-uppercase">Avansni racun</td>
+                                    <td class="text-uppercase">Avansni račun</td>
         
                                     <?php elseif ($invoice['profaktura'] == 1): ?>
                                     <td class="text-uppercase">Profaktura</td>
                                     <?php else: ?>
                                     <td class="text-uppercase">Faktura</td>
                                     <?php endif;?>
-                                    <!-- <th class="text-uppercase text-center">Faktura</th> -->
                                 </tr>
                         <tr>
                             <td>Datum: </td>
@@ -136,7 +125,7 @@
                         <tr>
                             <td></td>
                             <td class="text-center"><button id="edit-invoice"
-                                    class="btn-default text-uppercase" type="submit">Snimi izmene</button>
+                                    class="btn-sec text-uppercase" type="submit">Snimi izmene</button>
                             </td>
                         </tr>
                     </tbody>
@@ -221,7 +210,7 @@
         <?php endif;?>
         <div class="bg-light p-2 my-3"><strong>Napomena:</strong> <?php echo $invoice['notes'];?></div>
         <div class="text-center">
-        <button class="my-3 btn-default text-success text-uppercase"><a href="<?php echo base_url() . 'invoices/make_pdf/' . $invoice['id']; ?>">Napravi pdf fakturu</a></button>                
+            <button class="my-3 btn-sec text-uppercase"><a href="<?php echo base_url() . 'invoices/make_pdf/' . $invoice['id']; ?>">Napravi pdf fakturu</a></button>                
         </div>
     </div><!-- faktura -->
 </div><!-- container -->

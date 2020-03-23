@@ -4,11 +4,29 @@ body {
     -webkit-font-smoothing: antialiased;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Open sans', sans-serif;
     font-size: 14px;
     box-sizing: border-box;
     margin: 0;
-    /* background: url(../img/white1.jpg) repeat; */
+    width: 100%;
+    height: 100vh;
+    /* background-image: url(../img/nasivojmala.svg); */
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@keyframes yourAnimation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+h6 img {
+    animation: yourAnimation 5s infinite 0s linear;
 }
 
 a {
@@ -17,20 +35,24 @@ a {
 
 a:hover {
     text-decoration: none;
+    color: inherit;
 }
 
-button#edit-invoice {
-    color: #28a745;
+.btn-sec {
+    padding: 4px;
+    border-radius: 4px;
+    color: rgb(53, 52, 52);
+}
+
+.btn-sec:hover,
+button#edit-invoice:hover {
+    border: 2px solid #7c7c7c;
+    color: #000000;
 }
 
 nav a:hover {
     text-decoration: none;
     color: rgb(175, 225, 245);
-}
-
-button.my-3 a:hover,
-button#edit-invoice:hover {
-    color: rgb(23, 141, 252);
 }
 
 .dropdown-menu {
@@ -42,13 +64,6 @@ button#edit-invoice:hover {
 .dropdown-item {
     color: inherit;
 }
-
-
-/* button.my-3:hover a {
-    height: 100%;
-    background: green;
-    color: rgb(255, 46, 46);
-} */
 
 nav li>a,
 .dropdown>a {
@@ -79,7 +94,18 @@ label {
 }
 
 div.form-inline.my-2 label {
-    width: 30%;
+    width: 15%;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+form {
+    width: -webkit-fill-available;
+}
+
+.form-control {
+    width: 50%!important;
+    margin-right: auto;
 }
 
 table.table.table-borderless td {
@@ -96,18 +122,21 @@ caption {
 }
 
 .my-table {
-    margin-bottom: 50px;
-    border: 1px solid black;
+    margin: 50px;
+    margin-top: 5px;
+    /* border: 1px solid black; */
 }
 
-div.row.d-flex>div.col-sm-12.col-md-4 {
-    border-bottom: 1px solid black;
-    /* background-color: red; */
-    /* height: 3px; */
-    /* width: 110px; */
-    padding: 70px;
-    margin: 30px;
-    margin-bottom: 60px;
+div.col-sm-12.col-md-4:nth-of-type(3) {
+    /* padding: 10px; */
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+div.col-sm-12.col-md-4.p-4 {
+    /* padding: 10px; */
+    /* border-right: 2px solid gray; */
+    border-radius: 10px;
 }
 
 .btn-secondary {
@@ -131,7 +160,12 @@ div.row.d-flex>div.col-sm-12.col-md-4 {
     color: rgb(110, 161, 170);
 }
 
+i {
+    font-size: 18px;
+}
+
 button.edit-item,
+button.view-item,
 button.delete-item {
     background: transparent;
     border: none;
@@ -147,28 +181,39 @@ button.delete-item:hover {
     color: red;
 }
 
-th {
-    font-size: 16px!important;
-    /* border: none!important; */
+button.view-item:hover,
+button.view-item a:hover {
+    color: rgb(52, 78, 102);
 }
 
+th {
+    font-size: 16px!important;
+}
 
-/* .btn-secondary:hover {
-    border: 1px solid gray;
-} */
-
-div>img {
-    width: 60px;
+div>img,
+h6>img {
+    width: 35px;
     margin-left: auto;
     margin-right: auto;
-    display: block;
+    /* display: block; */
+}
+
+input {
+    /* width: 100%!important; */
 }
 
 .mytitle {
     display: block;
-    width: fit-content;
+    /* width: fit-content; */
+    margin-top: 54px;
     margin-left: auto;
     margin-right: auto;
-    padding: 10px;
-    border-bottom: 1px solid gray;
+    padding: 5px;
+    border-bottom: 1px dotted gray;
+}
+
+div.entry-item-box {
+    padding: 20px;
+    border: 2px solid gray;
+    border-radius: 12px;
 }

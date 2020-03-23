@@ -28,15 +28,15 @@
 
 <body>
 
-<nav class="navbar nav bg-dark">
+<nav class="navbar nav bg-dark fixed-top">
   <div class="container">
     <div class="d-flex">
-    <?php if(is_numeric($this->session->userdata('user_id'))): ;?>
-      <li class="nav-item">
-          <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/register"><i
-                  class="far fa-user-circle"></i> Registracija</a>
-      </li>
-    <?php endif;?>
+      <?php if (is_numeric($this->session->userdata('user_id'))): ;?>
+	        <li class="nav-item">
+	            <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/register"><i
+	                    class="far fa-user-circle"></i> Registracija</a>
+	        </li>
+	      <?php endif;?>
       <li class="nav-item">
           <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/login"><i
                   class="far fa-user-circle"></i> Login</a>
@@ -48,37 +48,46 @@
     </div>
     <li class="nav-item">
           <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>">Početna</a>
-      </li>
-    <?php if(is_numeric($this->session->userdata('user_id'))): ;?>
-    <div class="d-flex">
-<div class="dropdown">
-  <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Artikli
-  </a>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="<?php echo base_url(); ?>items/index">Pogledaj sve</a>
-    <a class="dropdown-item" href="<?php echo base_url(); ?>items/create">Unesi novi</a>
+    </li>
+      <?php if (is_numeric($this->session->userdata('user_id'))): ;?>
+	  <div class="d-flex">
+        <div class="dropdown">
+          <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Artikli
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="<?php echo base_url(); ?>items/index">Pogledaj sve</a>
+            <a class="dropdown-item" href="<?php echo base_url(); ?>items/create">Unesi novi</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Kompanije
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="<?php echo base_url(); ?>companies/index">Pogledaj sve</a>
+            <a class="dropdown-item" href="<?php echo base_url(); ?>companies/create">Unesi novu</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Fakture
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="<?php echo base_url(); ?>invoices/view_all">Pogledaj sve</a>
+            <a class="dropdown-item" href="<?php echo base_url(); ?>invoices/index">Unesi novu</a>
+          </div>
+        </div>
+        <div class="dropdown">
+          <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Ulaz
+          </a>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item" href="<?php echo base_url(); ?>entry/view_all">Pogledaj sve</a>
+            <a class="dropdown-item" href="<?php echo base_url(); ?>entry/index">Novi ulaz</a>
+          </div>
+      </div>
+	      <?php endif;?>
+    </div>
   </div>
-</div>
-<div class="dropdown">
-  <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Kompanije
-  </a>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="<?php echo base_url(); ?>companies/index">Pogledaj sve</a>
-    <a class="dropdown-item" href="<?php echo base_url(); ?>companies/create">Unesi novu</a>
-  </div>
-</div>
-<div class="dropdown">
-  <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Fakture
-  </a>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-    <a class="dropdown-item" href="<?php echo base_url(); ?>invoices/view_all">Pogledaj sve</a>
-    <a class="dropdown-item" href="<?php echo base_url(); ?>invoices/index">Unesi novu</a>
-  </div>
-</div>
-<?php endif;?>
-</div>
-</div>
 </nav>

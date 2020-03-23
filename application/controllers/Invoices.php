@@ -146,7 +146,7 @@
                 $data['without_tax'] += $value['price']*$value['quantity'];
                 $data['inv_total_with_tax'] += ($value['price'] + ($value['price']*($value['tax']/100)))*$value['quantity'];
             }
-            $data['total_inv'] = number_format($data['inv_total_with_tax'] - ($data['inv_total_with_tax']*$data['invoice']['discount']/100),2);
+            $data['total_inv'] = $data['inv_total_with_tax'] - ($data['inv_total_with_tax']*$data['invoice']['discount']/100);
             $html_total = '<tr>'.
             '<td>Total</td>'.
             '<td></td>'.
@@ -154,9 +154,9 @@
             '<td></td>'.
             '<td></td>'.
             '<td></td>'.
-            '<td>'.number_format($data['tax_count'], 2).'</td>'.
-            '<td>'.number_format($data['without_tax'], 2).'</td>'.
-            '<td>'.number_format($data['inv_total_with_tax'], 2).'</td></tr>';
+            '<td>'.$data['tax_count'].'</td>'.
+            '<td>'.$data['without_tax'].'</td>'.
+            '<td>'.$data['inv_total_with_tax'].'</td></tr>';
             $data['html'] = $html;
             $data['html_total'] = $html_total;
             $inovice_update['total'] =  $data['inv_total_with_tax'] - ($data['inv_total_with_tax']*$data['invoice']['discount']/100);
@@ -257,9 +257,9 @@
             '<td></td>'.
             '<td></td>'.
             '<td></td>'.
-            '<td>'.number_format($data['tax_count'], 2).'</td>'.
-            '<td>'.number_format($data['without_tax'], 2).'</td>'.
-            '<td>'.number_format($data['inv_total_with_tax'], 2).'</td></tr>';
+            '<td>'.$data['tax_count'].'</td>'.
+            '<td>'.$data['without_tax'].'</td>'.
+            '<td>'.$data['inv_total_with_tax'].'</td></tr>';
             $data['html'] = $html;
             $data['html_total'] = $html_total;
             $inovice_update['total'] =  $data['inv_total_with_tax'] - ($data['inv_total_with_tax']*$data['invoice']['discount']/100);

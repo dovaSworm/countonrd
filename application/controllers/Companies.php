@@ -4,7 +4,7 @@ class Companies extends CI_Controller
 
     public function index()
     {
-        $data['companies'] = $this->company_model->get_Companies();
+        $data['companies'] = $this->company_model->get_companies();
 
         if (empty($data['companies'])) {
             show_404();
@@ -34,11 +34,12 @@ class Companies extends CI_Controller
     public function update()
     {
         $this->form_validation->set_rules('name', 'Name', 'trim|required|');
-        $this->form_validation->set_rules('pib', 'PIB', 'trim|required|numeric|min_length[8]|max_length[8]');
+        $this->form_validation->set_rules('pib', 'PIB', 'trim|required|numeric|min_length[9]|max_length[9]');
         $this->form_validation->set_rules('mb', 'MB', 'trim|required|numeric|min_length[8]|max_length[8]');
         $this->form_validation->set_rules('adress', 'Adress', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required');
-        $this->form_validation->set_rules('account-num', 'Account number', 'trim|numeric|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim');
+        $this->form_validation->set_rules('account-num', 'Account number', 'trim|numeric');
+        $this->form_validation->set_rules('contact', 'Contact person', 'trim');
         // $varijabla = $this->company_model->update_company();
         if(!empty($this->company_model->update_company())){
             $this->session->set_flashdata('company_edited', 'Kompanija uspesno  izmenjena');
@@ -70,12 +71,13 @@ class Companies extends CI_Controller
     public function create()
     {
         $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_name_check');
-        $this->form_validation->set_rules('pib', 'PIB', 'trim|required|numeric|min_length[8]|max_length[8]');
+        $this->form_validation->set_rules('pib', 'PIB', 'trim|required|numeric|min_length[9]|max_length[9]');
         $this->form_validation->set_rules('mb', 'MB', 'trim|required|numeric|min_length[8]|max_length[8]');
         $this->form_validation->set_rules('adress', 'Adress', 'trim|required');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required');
-        $this->form_validation->set_rules('account-num', 'Account number', 'trim|numeric|required');
-        $this->form_validation->set_rules('bank', 'Bank', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim');
+        $this->form_validation->set_rules('account-num', 'Account number', 'trim|numeric');
+        $this->form_validation->set_rules('bank', 'Bank', 'trim');
+        $this->form_validation->set_rules('contact', 'Contact person', 'trim');
         $data = array(
             'name' => $this->input->post('name'),
             'pib' => $this->input->post('pib'),
@@ -87,6 +89,7 @@ class Companies extends CI_Controller
             'phone' => $this->input->post('phone'),
             'zip_code' => $this->input->post('zip-code'),
             'account_num' => $this->input->post('account-num'),
+            'contact' => $this->input->post('contact')
         );
 
         if ($this->form_validation->run() === false) {

@@ -12,20 +12,25 @@
 
 <div class="container justify-contetn-center mt-4">
     <div class="row no-gutters">
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-3">
             <h3>Artikli</h3>
             <div><a href="<?php echo base_url(); ?>items/index">Pogledaj sve</a></div>
             <div><a href="<?php echo base_url(); ?>items/create">Napravi artikal</a></div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-3">
             <h3>Kompanije</h3>
             <div><a href="<?php echo base_url(); ?>companies/index">Pogledaj sve</a></div>
             <div><a href="<?php echo base_url(); ?>companies/create">Napravi kompaniju</a></div>
         </div>
-        <div class="col-sm-12 col-md-4">
+        <div class="col-sm-12 col-md-3">
             <h3>Fakture</h3>
             <div><a href="<?php echo base_url(); ?>invoices/view_all">Pogledaj sve</a></div>
             <div><a href="<?php echo base_url(); ?>invoices/index">Napravi fakturu</a></div>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <h3>Ulazi</h3>
+            <div><a href="<?php echo base_url(); ?>entry/view_all">Pogledaj sve</a></div>
+            <div><a href="<?php echo base_url(); ?>entry/index">Napravi fakturu</a></div>
         </div>
     </div>
 </div>

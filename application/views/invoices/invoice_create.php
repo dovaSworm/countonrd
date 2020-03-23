@@ -4,8 +4,7 @@
     }    
 ?>
 <div class="mytitle">
-    <img src="<?php echo base_url().'/assets/img/logo.png' ;?>" alt="">
-    <h2 class="text-center my-1">COUNTONRD</h2>
+    <h6 class="text-center my-1">CountOn<img src="<?php echo base_url().'/assets/img/sivibek.svg' ;?>" alt=""></h6>
 </div>
 <h4 class="text-center my-2">Unesi novu fakturu</h4>
 <div class="container d-flex justify-content-center">
@@ -18,15 +17,18 @@
             echo '<div class="alert alert-warning">' . form_error('date') . '</div>';
         }
         ?>
-            <input type="text" id="date" name="date" class="form-control" value="<?php echo set_value('date', ''); ?>" placeholder="Datum izdavanja fakture">
+            <input type="text" id="date" name="date" class="form-control" value="<?php echo set_value('date', ''); ?>" placeholder="Izdavanja fakture">
         </div>
+        <small class="form-text text-muted">
+        Datumn u formatu GGGG-MM-DD (2000-02-22)
+        </small>
         <div class="form-inline my-2">
             <label>Broj fakture</label>
             <?php if (form_error('inv-num')) {
             echo '<div class="alert alert-warning">' . form_error('inv-num') . '</div>';
         }
         ?>
-            <input type="text" name="inv-num" id="inv-num" class="form-control" value="<?php echo set_value('inv-num', ''); ?>" placeholder="Unesit broj fakture">
+            <input type="text" name="inv-num" id="inv-num" class="form-control" value="<?php echo set_value('inv-num', ''); ?>">
         </div>
 
         <div class="form-inline my-2">
@@ -59,7 +61,7 @@
             echo '<div class="alert alert-warning">' . form_error('currency') . '</div>';
         }
         ?>
-                <input type="text" name="currency" class="form-control" placeholder="Unesite popust za proizvod" value="<?php echo set_value('currency', ''); ?>">
+                <input type="text" name="currency" class="form-control" placeholder="Tri-slovna šifra" value="<?php echo set_value('currency', ''); ?>">
         </div>
         <div class="form-inline my-2">
             <label>Total</label>
@@ -70,12 +72,12 @@
             <input type="text" id="total" name="total" class="form-control" value="<?php echo set_value('total', ''); ?>">
         </div>
         <div class="form-inline my-2">
-            <label>Rok za placanje</label>
+            <label>Rok za plaćanje</label>
             <?php if (form_error('pay-deadline')) {
             echo '<div class="alert alert-warning">' . form_error('pay-deadline') . '</div>';
         }
         ?>
-            <input type="text" name="pay-deadline" class="form-control" placeholder="Unesite popust za proizvod" value="<?php echo set_value('pay-deadline', ''); ?>">
+            <input type="text" name="pay-deadline" class="form-control" placeholder="Datum" value="<?php echo set_value('pay-deadline', ''); ?>">
         </div>
 
             <div class="form-inline my-2">
@@ -84,7 +86,7 @@
             echo '<div class="alert alert-warning">' . form_error('discount') . '</div>';
         }
         ?>
-                <input type="text" name="discount" class="form-control" placeholder="Unesite popust za proizvod" value="<?php echo set_value('discount', ''); ?>">
+                <input type="text" name="discount" class="form-control" placeholder="Popust(%)" value="<?php echo set_value('discount', ''); ?>">
             </div>
             <div class="form-inline my-2">
                 <label>Profaktura</label>
@@ -110,9 +112,11 @@
         ?>
                 <textarea type="text" name="notes" class="form-control"  value=""></textarea>
             </div>
-            <button id="create-inv-btn" class="btn mybutton" type="submit">Kreiraj fakturu</button>
-</div>
-<?php echo form_close(); ?>
+            <div class="text-center">
+                <button id="create-inv-btn" class="btn mybutton" type="submit">Kreiraj fakturu</button>
+            </div>
+        <?php echo form_close(); ?>
+    </div>
 </div>
 <?php if ($this->session->flashdata('invoice_created')): ?>
 <?php echo '<p class="alert alert-success">' . $this->session->flashdata('invoice_created') . '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'; ?>

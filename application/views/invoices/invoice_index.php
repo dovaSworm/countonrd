@@ -1,6 +1,5 @@
 <div class="mytitle">
-    <img src="<?php echo base_url().'/assets/img/logo.png' ;?>" alt="">
-    <h2 class="text-center my-1">COUNTONRD</h2>
+    <h6 class="text-center my-1">CountOn<img src="<?php echo base_url().'/assets/img/sivibek.svg' ;?>" alt=""></h6>
 </div>
 <?php $user = $this->session->userdata('user_id');
 if (!is_numeric($user)) {

@@ -120,7 +120,7 @@ z-index: 5
     /* width: -webkit-fill-available; */
 }
 thead{
-
+    background: #d2e9fa;
     border-bottom: 1px dotted black;
     /* border-top: 1px solid gray; */
 }
@@ -152,9 +152,7 @@ thead{
     margin-left: 110px;
     display: inline-block;
 } */
-thead{
-    background: #d2e9fa;
-}
+
 .bigsign{
     margin-top: 40px;
 }

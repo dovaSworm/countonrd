@@ -14,7 +14,8 @@
             alert("error");
         });
     });
-
+    <a href="<?php echo base_url(); ?>entry/edit/<?php echo $value['id']; ?>"
+                            ><i class="fas fa-pen"></i></a>
 
 
 
