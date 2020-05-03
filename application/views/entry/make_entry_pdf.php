@@ -13,8 +13,11 @@
     /* font-weight: bolder; */
     font-size: 14px;
     box-sizing: border-box;
-    margin: 0;
+    margin: 0!important;
     width: 100%;
+}
+@page{
+    margin:20px 10px 10px 10px!important;
 }
     h3{
         margin-top: 100px;
@@ -23,7 +26,9 @@
         background: #d2e9fa;
         border-bottom: 1px dotted black;
     }
+  
 </style>
+<div class="m-0">
 <div class="text-center">
     <h6>Datum ulaza: <?php echo $entry['date']; ?></h6>
     <p><?php echo $entry['name']; ?></p>
@@ -31,36 +36,37 @@
 <div class="w-auto my-3">
             <table class="table table-borderless" id="mydata">
                 <thead>
-                    <tr>
-                        <td style="width:10%">Šifra dobavljača</td>
-                        <td style="width:10%">Šifra artikla</td>
-                        <td style="width:17%">Naziv artikla</td>
-                        <td>Ulazna cena deviza</td>
-                        <td>Deviza</td>
-                        <td>Kurs devize</td>
-                        <td>Ulazna cena dinari</td>
-                        <td>Izlazna cena dinari</td>
-                        <td>Izlazna cena (evro)</td>
-                        <td>Količina</td>
+                    <tr style="padding:0px 0px 0px 3px">
+                        <td style="width:12%;padding:0px 0px 0px 3px">Šifra dobavljača</td>
+                        <td style="width:12%;padding:0px 0px 0px 3px">Šifra artikla</td>
+                        <td style="width:20%;padding:0px 0px 0px 3px">Naziv artikla</td>
+                        <td style="padding:0px 0px 0px 3px">Ulazna cena deviza</td>
+                        <td style="width:5%;padding:0px 0px 0px 3px">Deviza</td>
+                        <td style="padding:0px 0px 0px 3px">Kurs devize</td>
+                        <td style="padding:0px 0px 0px 3px">Ulazna cena dinari</td>
+                        <td style="padding:0px 0px 0px 3px">Izlazna cena dinari</td>
+                        <td style="padding:0px 0px 0px 3px">Izlazna cena (evro)</td>
+                        <td style="width:5%;padding:0px 0px 0px 3px">Količina</td>
                     </tr>
                 </thead>
 
                 <tbody>
                     <?php foreach($entry_items as $key => $value): ;?>
-                    <tr>
-                        <td><?php echo $value['sellers_code'];?></td>
-                        <td><?php echo $value['code'] ;?></td>
-                        <td><?php echo $value['name'] ;?></td>
-                        <td><?php echo $value['buying_for'] ;?></td>
-                        <td><?php echo $value['currency'] ;?></td>
-                        <td><?php echo $value['exch_rate'] ;?></td>
-                        <td><?php echo $value['buying_home'] ;?></td>
-                        <td><?php echo $value['selling_home'] ;?></td>
-                        <td><?php echo $value['selling_for'] ;?></td>
-                        <td><?php echo $value['quantity'] ;?></td>
+                    <tr style="padding:0px 0px 0px 3px">
+                        <td style="padding:0px 0px 0px 3px"><?php echo $value['sellers_code'];?></td>
+                        <td style="padding:0px 0px 0px 3px"><?php echo $value['code'] ;?></td>
+                        <td style="padding:0px 0px 0px 3px"><?php echo $value['name'] ;?></td>
+                        <td style="padding:0px 0px 0px 3px"><?php echo $value['buying_for'] ;?></td>
+                        <td style="padding:0px 0px 0px 3px"><?php echo $value['currency'] ;?></td>
+                        <td style="padding:0px 0px 0px 3px"><?php echo $value['exch_rate'] ;?></td>
+                        <td style="padding:0px 0px 0px 3px"><?php echo $value['buying_home'] ;?></td>
+                        <td style="padding:0px 0px 0px 3px"><?php echo $value['selling_home'] ;?></td>
+                        <td style="padding:0px 0px 0px 3px"><?php echo $value['selling_for'] ;?></td>
+                        <td style="padding:0px 0px 0px 3px;text-align:center"><?php echo $value['quantity'] ;?></td>
                     </tr>
 
                     <?php endforeach; ?>
                     </tbody>
             </table>
+        </div>
         </div>

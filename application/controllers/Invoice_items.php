@@ -24,13 +24,16 @@
             if($item_id===null){
                 $item_id=false;
             }
+            $invoice = $this->invoice_model->get_one($inv_id);
             $item = $this->item_model->get_one($item_id);
             $quantity = 1;
             $data = array(
                 'name' => $item['name'],
                 'item_id' => $item['id'],
                 'inv_id' => $inv_id,
-                'sellers_code' => $item['code'],
+                'code' => $item['code'],
+                'it_disc' => 0,
+                'sellers_code' => $item['sellers_code'],
                 'sellers_name' => $item['sellers_name'],
                 'price' => $item['selling_price'],
                 'mes_unit' => $item['mes_unit'],
@@ -40,7 +43,7 @@
             );
             
             $this->invoice_item_model->create($data);
-            if($item['group_id'] == 1){
+            if(($item['group_id'] == 1) && !($invoice['profaktura'] == 0 && $invoice['avans'] == 0)){
                 $this->item_model->change_quantity(($item['quantity']-$quantity),$item_id);
             }
             $this->session->set_flashdata('invoiceitem_created', 'invoiceitem uspesno dodana u bazu');
@@ -54,14 +57,17 @@
                 $id=false;
             }
             $inv_item = $this->invoice_item_model->get_one($id);
+            $invoice=$this->invoice_model->get_one($inv_item['inv_id']);
             $item = $this->item_model->get_one($inv_item['item_id']);
             $data['quantity'] = $this->input->post('quantity');
             $data['tax'] = $this->input->post('tax');
+            $data['it_disc'] = $this->input->post('it-disc');
             $data['price'] = $this->input->post('price');
-            $data['total'] = $this->input->post('quantity')*($data['price'] + ($data['price']*($this->input->post('tax')/100)));
+            $notax = ($data['price'] - $data['price']*($data['it_disc']/100))*$data['quantity'];
+            $data['total'] = $notax + ($notax*($data['tax']/100));
             $this->invoice_item_model->update($data, $id);
-            if($item['group_id'] == 1){
-            $this->item_model->change_quantity(($item['quantity']-$data['quantity']+$inv_item['quantity']),$inv_item['item_id']);
+            if(($item['group_id'] == 1) && !($invoice['profaktura'] == 0 && $invoice['avans'] == 0)){
+                $this->item_model->change_quantity(($item['quantity']-$data['quantity']+$inv_item['quantity']),$inv_item['item_id']);
             }
             redirect('invoices/view/' . $inv_item['inv_id']);
             // echo json_encode($data['tax'] . " plus kolicina " . $data['quantity']);
@@ -77,11 +83,12 @@
             if($inv_id===null){
                 $inv_id=false;
             }
+            $invoice=$this->invoice_model->get_one($id);
             $inv_item = $this->invoice_item_model->get_one($id);
             $this->invoice_item_model->delete($id);
             $item = $this->item_model->get_one($inv_item['item_id']);
-            if($item['group_id'] == 1){
-            $this->item_model->change_quantity(($item['quantity']+$inv_item['quantity']),$inv_item['item_id']);
+            if(($item['group_id'] == 1) && !($invoice['profaktura'] == 0 && $invoice['avans'] == 0)){
+                $this->item_model->change_quantity(($item['quantity']+$inv_item['quantity']),$inv_item['item_id']);
             }
             redirect('invoices/view/' . $inv_id);
         }

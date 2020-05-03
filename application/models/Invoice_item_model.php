@@ -48,13 +48,6 @@ class Invoice_item_model extends CI_Model
         $query = $this->db->get_where('invoice_items', array('id' => $id));
         return $query->row_array();
     }
-    public function delete_invoice_item($id)
-    {
-        $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
-        $this->db->where('id', $id);
-        $this->db->delete('invoice_items');
-        return true;
-    }
     public function update_invoice_item()
     {
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
@@ -72,6 +65,44 @@ class Invoice_item_model extends CI_Model
 
         $this->db->where('id', $this->input->post('id'));
         return $this->db->update('invoice_items', $data);
+    }
+    public function delete_by_inv($inv_id)
+    {
+        $this->db->delete('invoice_items', array('inv_id' => $inv_id));
+    }
+
+    public function best_sell($param, $order, $month)
+    {
+        $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
+        $sql = "SELECT name, SUM($param) AS total
+        FROM invoice_items join invoices on invoice_items.inv_id = invoices.id
+        where MONTH(invoices.date) = '{$month}'
+        GROUP BY name
+        ORDER BY SUM($param) $order LIMIT 3;";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function ava_prof_items($type)
+    {
+        $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
+        $sql = "SELECT name, SUM(quantity) AS total
+        FROM invoice_items join invoices on invoice_items.inv_id = invoices.id
+        where $type = 1
+        GROUP BY name
+        ORDER BY SUM(quantity);";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+    }
+
+    public function items_total()
+    {
+        $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
+        $sql = "SELECT ii.name, COUNT(ii.quantity) as quantity, SUM(ii.total) as total FROM invoice_items ii JOIN invoices i ON ii.inv_id = i.id GROUP BY ii.name ORDER BY total DESC LIMIT 7";
+        $query = $this->db->query($sql);
+        if ($query->num_fields() > 0) {
+            return $query->result_array();
+        } 
     }
 
 }

@@ -1,0 +1,420 @@
+nav a:hover {
+    text-decoration: none;
+    color: #9de0ec;
+}
+
+nav li>a {
+    color: white;
+    text-transform: uppercase;
+}
+
+nav {
+    background: rgb(18, 31, 45);
+    top: 0;
+    display: flex;
+    position: fixed;
+    right: 0;
+    width: 100%;
+    height: 6vh;
+    z-index: 77777;
+    li {
+        list-style: none;
+    }
+    a.nav-btn {
+        transition: 0.5s border ease-in;
+        padding: 5px 5px;
+        margin: 1px 2px;
+        border-top: 1px solid transparent;
+        border-right: 1px solid transparent;
+        border-left: 1px solid transparent;
+    }
+    a.nav-btn.show-border {
+        border-top: 1px solid white;
+        border-right: 1px solid white;
+        border-left: 1px solid white;
+    }
+    .logo-holder {
+        position: absolute;
+        display: flex;
+        align-items: center;
+        height: 100%;
+        left: 5px;
+        img {
+            height: 30px;
+        }
+    }
+}
+
+#loging {
+    padding-left: 10px;
+    position: absolute;
+    align-items: center;
+    height: 100%;
+}
+
+.sub-menu {
+    z-index: 2;
+    pointer-events: none;
+    transition: all .5s ease-in;
+    position: absolute;
+    opacity: 0;
+    background: rgb(18, 31, 45);
+    margin-top: 8px;
+    margin-left: 2px;
+    border: 1px solid white;
+    padding: 5px!important;
+    -webkit-box-shadow: 0px 0px 0px 3px rgb(18, 31, 45), 0px 0px 0px 2px white;
+    box-shadow: 0px 0px 0px 3px rgb(18, 31, 45), 0px 0px 0px 2px white;
+}
+
+.first-sub:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: -1px;
+    background-color: white;
+}
+
+.first-sub a:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: 66px;
+    background-color: white;
+}
+
+.first-sub:after {
+    content: " ";
+    position: absolute;
+    width: 66px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: 0px;
+    background-color: rgb(18, 31, 45);
+}
+
+.sec-sub:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: -1px;
+    background-color: white;
+}
+
+.sec-sub a:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: 77px;
+    background-color: white;
+}
+
+.sec-sub:after {
+    content: " ";
+    position: absolute;
+    width: 77px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: 0px;
+    background-color: rgb(18, 31, 45);
+}
+
+.thr-sub:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: -1px;
+    background-color: white;
+}
+
+.thr-sub a:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: 96px;
+    background-color: white;
+}
+
+.thr-sub:after {
+    content: " ";
+    position: absolute;
+    width: 96px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: 0px;
+    background-color: rgb(18, 31, 45);
+}
+
+.last-sub:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    right: -1px;
+    background-color: white;
+}
+
+.last-sub a:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    margin-left: 58px;
+    background-color: white;
+}
+
+.last-sub:after {
+    content: " ";
+    position: absolute;
+    width: 54px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    right: 0px;
+    background-color: rgb(18, 31, 45);
+}
+
+// ////////////////////////////////@extend
+.even-sub:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    right: -1px;
+    background-color: white;
+}
+
+.even-sub a:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: 64px;
+    background-color: white;
+}
+
+.even-sub:after {
+    content: " ";
+    position: absolute;
+    width: 54px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    right: 0px;
+    background-color: rgb(18, 31, 45);
+}
+
+.even-sec-sub:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: -1px;
+    background-color: white;
+}
+
+.even-sec-sub a:before {
+    content: " ";
+    position: absolute;
+    width: 1px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: 78px;
+    background-color: white;
+}
+
+.even-sec-sub:after {
+    content: " ";
+    position: absolute;
+    width: 78px;
+    height: 5px;
+    z-index: 1;
+    top: -5px;
+    left: 0px;
+    background-color: rgb(18, 31, 45);
+}
+
+.sub-menu.showmy {
+    pointer-events: all;
+}
+
+.sub-menu.sec-sub {}
+
+.showmy {
+    opacity: 1;
+}
+
+.nav-links {
+    z-index: 3;
+    display: flex;
+    list-style: none;
+    width: fit-content;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+.nav-links>li:last-of-type ul.sub-menu {
+    right: 27px;
+}
+
+.nav-links li a {
+    color: white;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+    &:hover {
+        color: #9de0ec;
+    }
+}
+
+// @media screen and (min-width: 768px)and (max-width: 1023px) {
+// }
+@media screen and (max-width: 767px) {
+    nav {
+        height: 8vh;
+        .hamburger {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            position: absolute;
+            cursor: pointer;
+            right: 1%;
+            top: 0;
+            z-index: 44444;
+            .line {
+                width: 30px;
+                height: 3px;
+                background: white;
+                margin: 5px;
+            }
+        }
+        .nav-links>li:last-of-type ul.sub-menu {
+            right: 2px!important;
+        }
+        .nav-links {
+            margin-top: -1px;
+            z-index: 3333;
+            display: flex;
+            list-style: none;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-top: 10px;
+            padding-left: 5px;
+            left: 0;
+            position: absolute;
+            background: rgb(18, 31, 45);
+            height: 23vh;
+            width: 100%;
+            min-height: 102px;
+            flex-direction: row;
+            clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
+            transition: all 1s ease-out;
+            pointer-events: none;
+            .sub-menu {
+                margin-top: 8px;
+                margin-left: 2px;
+                li {
+                    a {
+                        padding: 2px 5px;
+                    }
+                }
+            }
+            li {
+                transition: all 1s ease-out;
+                opacity: 0;
+            }
+            li a {
+                color: white;
+                &:hover {
+                    color: white;
+                }
+            }
+            .nav-links li:nth-child(1) {
+                transition: all 0.5s ease 0.2s;
+            }
+            .nav-links li:nth-child(2) {
+                transition: all 0.5s ease 0.4s;
+            }
+            .nav-links li:nth-child(3) {
+                transition: all 0.5s ease 0.6s;
+            }
+            li.fade {
+                opacity: 1;
+            }
+        }
+        .nav-links.open {
+            z-index: 333;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+            pointer-events: all;
+        }
+        .even-sub a:before {
+            left: 73px;
+        }
+        .sec-sub a:before {
+            left: 78px;
+        }
+        .sec-sub:after {
+            width: 78px;
+        }
+        .last-sub a:before {
+            margin-left: 63px;
+        }
+        #loging {
+            position: relative;
+        }
+        .even-sec-sub a:before {
+            left: 78px;
+        }
+        .even-sec-sub:after {
+            width: 78px;
+        }
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .even-sec-sub a:before {
+        left: 77px!important;
+    }
+    .even-sec-sub:after {
+        width: 77px!important;
+    }
+}

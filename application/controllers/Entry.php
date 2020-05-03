@@ -14,36 +14,55 @@ class Entry extends CI_Controller
         $this->load->view('entry/entry_create', $data);
         $this->load->view('templates/footer');
     }
-
-    public function create()
+    public function credit()
     {
-        $this->form_validation->set_rules('date', 'Date', 'trim|required');
-        $this->form_validation->set_rules('name', 'Name', 'trim|required');
+      $entry_id=$this->uri->segment(3);
+      $date = date_create_from_format("Y-m-d", $this->input->post('date'))->format("Y-m-d");
+      $data = array(
+          'date' => $date,
+          'name' => $this->input->post('name')
+      );
+      if($entry_id===null){
+          $this->form_validation->set_rules('date', 'Date', 'trim|required');
+          $this->form_validation->set_rules('name', 'Name', 'trim|required');
+
+          $this->entry_model->create($data);
+          $data['entry'] = $this->entry_model->get_by_date_and_item_name($date, $data['name']);
+          redirect('entry/view/' . $data['entry']['id'] , 'refresh');
+      }
+
+      $this->entry_model->update($data, $entry_id);
+      redirect('entry/view/'.$entry_id);
+    }
+    // public function create()
+    // {
+    //     $this->form_validation->set_rules('date', 'Date', 'trim|required');
+    //     $this->form_validation->set_rules('name', 'Name', 'trim|required');
 
         
-        $date = date_create_from_format("Y-m-d", $this->input->post('date'))->format("Y-m-d");
-        $data = array(
-            'date' => $date,
-            'name' => $this->input->post('name')
-        );
-        if($this->form_validation->run() === FALSE){
-            $item = $this->item_model->get_one($this->input->post('item'));
-            $this->load->view('templates/header');
-            $this->load->view('entry/entry_create', $data);
-            $this->load->view('templates/footer');  
-            $this->session->set_flashdata('entry_not_created', 'Kalkulacija cena nije dodana u bazu');
-        }else{
-            if($created = $this->entry_model->create($data)){
-                $data['entry'] = $this->entry_model->get_by_date_and_item_name($date, $item['name']);
-                $this->session->set_flashdata('entry_created', 'Kalkulacija uspesno dodana u bazu');
-                $this->session->set_flashdata('entry', $data['entry']);
-                
-                redirect('entry/view/' . $data['entry']['id'] , 'refresh');
-            }else{
-                $this->db->error();
-            }
-        }
-    }
+    //     $date = date_create_from_format("Y-m-d", $this->input->post('date'))->format("Y-m-d");
+    //     $data = array(
+    //         'date' => $date,
+    //         'name' => $this->input->post('name')
+    //     );
+    //     if($this->form_validation->run() === FALSE){
+    //         // $item = $this->item_model->get_one($this->input->post('item'));
+    //         $this->load->view('templates/header');
+    //         $this->load->view('entry/entry_create', $data);
+    //         $this->load->view('templates/footer');  
+    //         $this->session->set_flashdata('entry_not_created', 'Kalkulacija cena nije dodana u bazu');
+    //     }else{
+    //         if($created = $this->entry_model->create($data)){
+    //             $data['entry'] = $this->entry_model->get_by_date_and_item_name($date, $data['name']);
+    //             $this->session->set_flashdata('entry_created', 'Kalkulacija uspesno dodana u bazu');
+    //             $this->session->set_flashdata('entry', $data['entry']);
+
+    //             redirect('entry/view/' . $data['entry']['id'] , 'refresh');
+    //         }else{
+    //             $this->db->error();
+    //         }
+    //     }
+    // }
 
     public function view()
     {
@@ -67,7 +86,8 @@ class Entry extends CI_Controller
     {
         $id=$this->uri->segment(3);
             if($id===null){
-                $id=false;
+                $this->session->set_flashdata('info', 'Prvo napraviti ulaz pa onda dodati artikle!');
+                redirect('entry/view' , 'refresh');
             }
         $this->form_validation->set_rules('currency', 'Currency', 'trim|min_length[2]|max_length[3]');
         $this->form_validation->set_rules('exch-rate', 'Exchange rate', 'trim');
@@ -76,9 +96,12 @@ class Entry extends CI_Controller
         $this->form_validation->set_rules('selling-for', 'Selling price foreign', 'trim|required');
         $this->form_validation->set_rules('selling-home', 'Selling price home', 'trim|required');
         $this->form_validation->set_rules('quantity', 'Quantity', 'trim|numeric|required');
+        $this->form_validation->set_message('required', 'Polje je obavezno!');
+        $this->form_validation->set_message('min_length', 'Unos ta ovo polje je prekratko!');
+        $this->form_validation->set_message('max_length', 'Unos ta ovo polje je predugačak!');
         $data['entry'] = $this->entry_model->get_one($id);
         $item = $this->item_model->get_one($this->input->post('item'));
-        $currency = "DIN";
+        $currency = "RSD";
         if(!empty($_POST['currency'])){
             $currency = $this->input->post('currency');
         }
@@ -97,7 +120,9 @@ class Entry extends CI_Controller
                 'quantity' => $this->input->post('quantity')
             );
             if($this->form_validation->run() === FALSE){
+                $data['entry'] = $this->entry_model->get_one($id);
                 $item = $this->item_model->get_one($this->input->post('item'));
+                $data['entry_items'] = $this->entry_item_model->get_all_by_entry_id($id);
                 $this->load->view('templates/header');
                 $this->load->view('entry/entry_view', $data);
                 $this->load->view('templates/footer');  
@@ -105,6 +130,9 @@ class Entry extends CI_Controller
             }else{
                 if($created = $this->entry_item_model->create($data)){
                     $this->item_model->change_quantity($item['quantity'] + $this->input->post('quantity'), $item['id']);
+                    $update_item_date['buying_price'] = $this->input->post('buying-home');
+                    $update_item_date['selling_price'] = $this->input->post('selling-home');
+                    $this->item_model->update_item($update_item_date, $item['id']);
                     $data['entry'] = $this->entry_model->get_one($id);
                     $data['entry_items'] = $this->entry_item_model->get_all_by_entry_id($id);
                     $this->session->set_flashdata('entry_created', 'Kalkulacija uspesno dodana u bazu');
@@ -170,6 +198,7 @@ class Entry extends CI_Controller
                 $entry_id=false;
             }
             $this->entry_model->delete($entry_id);
+            redirect('entry/view_all/');
         }
         public function view_all($offset = 0)
         {
@@ -211,16 +240,32 @@ class Entry extends CI_Controller
             $this->load->view('templates/footer');
         }
 
-        public function update()
-        {
-            $entry_id=$this->input->post('id');
-            if($entry_id===null){
-                $entry_id=false;
-            }
-            $data['name'] = $this->input->post('name');
-            $data['date'] = $this->input->post('date');
-            $this->entry_model->update($data, $entry_id);
-            redirect('entry/view_all');
-        }
+        // public function edit($id)
+        // {
+        //     $naslov['title'] = 'Edit';
+        //     $data['entry'] = $this->entry_model->get_one($id);
+        //     if (empty($data['entry'])) {
+        //         show_404();
+        //     }
+        //     $data['title'] = $data['entry']['name'];
+    
+        //     $this->load->view('templates/header', $naslov);
+        //     $this->load->view('entry/entry_update', $data);
+        //     $this->load->view('templates/footer');
+        // }
+        // public function update()
+        // {
+        //     $entry_id=$this->uri->segment(3);
+        //     if($entry_id===null){
+        //         $entry_id=false;
+        //     }
+        //     $entry = $this->entry_model->get_one($entry_id);
+        //     $data['name'] = $entry['name'];
+        //     $data['date'] = $entry['date'];
+        //     $this->entry_model->update($data, $entry_id);
+        //     redirect('entry/view/'.$entry_id);
+        // }
+
+      
 
 }

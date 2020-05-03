@@ -2,7 +2,6 @@
 class Invoice_model extends CI_Model
 {
 
-
     public function create($data)
     {
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
@@ -18,7 +17,7 @@ class Invoice_model extends CI_Model
             $query = $this->db->get('invoice_items');
             return $query->result_array();
         } else {
-            $sql = "SELECT invoices.date, invoices.avans, invoices.due, invoices.payed, invoices.profaktura, invoices.id, invoices.total, 
+            $sql = "SELECT invoices.date, invoices.avans, invoices.due, invoices.payed, invoices.profaktura, invoices.letters, invoices.id, invoices.total,
             invoices.inv_num, invoices.currency, invoices.notes, invoices.pay_deadline, invoices.discount, c.name as buyername, c.mb as buyermb, c.pib as buyerpib, c.adress as buyeradress, c.city as buyercity, c.zip_code as buyerzip,
              c2.name as sellername, c2.pib sellerpib, c2.mb sellermb, c2.phone sellerphone, c2.account_num selleracc_num, c2.bank sellerbank, c2.email selleremail, c2.adress as selleradress, c2.city sellercity, c2.account_num selleraccount, c2.zip_code as sellerzip FROM invoices INNER JOIN companies c ON c.name = invoices.buyer INNER JOIN companies c2 ON c2.name = invoices.seller where invoices.id = ?";
             $query = $this->db->query($sql, $id);
@@ -55,27 +54,106 @@ class Invoice_model extends CI_Model
         $query = $this->db->get_where('invoices', array('id' => $id));
         return $query->row_array();
     }
-    public function get_invoices($limit = FALSE, $offset = FALSE)
+    public function get_invoices($limit = false, $offset = false)
     {
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
-        if($limit){
+        if ($limit) {
             $this->db->limit($limit, $offset);
         }
-        $this->db->order_by('id');
+        $this->db->select('invoices.*, c.name AS buyername, cc.name AS sellername');
+        $this->db->join('companies c', 'invoices.buyer = c.name','left');
+        $this->db->join('companies cc', 'invoices.seller = cc.name','left');
         $query = $this->db->get('invoices');
         return $query->result_array();
     }
 
-    public function get_invoices_for_buyer($id, $prokup)
+    public function get_total_and_due($company, $prokup, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof)
     {
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
-        // $query = $this->db->get_where('invoices', array('buyer' => $id));
-        $sql = "SELECT SUM(total) as total
+        // $query = $this->db->get_where('invoices', array('buyer' => $company));
+        $sql = "SELECT SUM(total) as total, SUM(due) as due, currency
         FROM invoices
-        where $prokup=?";
-            $query = $this->db->query($sql, $id);
-        // $query = $this->db->get('invoices');
-        return $query->row_array();
+        where $prokup=? GROUP BY currency";
+        if (!$date_from == "") {
+            $sql .= "AND date >='{$date_from}'";
+        }
+        if (!$date_to == "") {
+            $sql .= "AND date <='{$date_to}'";
+        }
+        if (!$pay_deadline == "") {
+            $sql .= "AND pay_deadline <='{$pay_deadline}'";
+        }
+        if (!$currency == "") {
+            $sql .= "AND currency ='{$currency}'";
+        }
+        if ($avans > 0) {
+            $sql .= "AND avans ='{$avans}'";
+        }
+        if ($prof > 0) {
+            $sql .= "AND profaktura ='{$prof}'";
+        }
+        $query = $this->db->query($sql, $company);
+        return $query->result_array();
     }
-
+    public function get_inv_num_for_company($company, $bors, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof)
+    {
+        $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
+        $sql = "SELECT inv_num, total, currency, due
+        FROM invoices
+        where $bors=?";
+        if (!$date_from == "") {
+            $sql .= "AND date >='{$date_from}'";
+        }
+        if (!$date_to == "") {
+            $sql .= "AND date <='{$date_to}'";
+        }
+        if (!$pay_deadline == "") {
+            $sql .= "AND pay_deadline <='{$pay_deadline}'";
+        }
+        if (!$currency == "") {
+            $sql .= "AND currency ='{$currency}'";
+        }
+        if ($avans > 0) {
+            $sql .= "AND avans ='{$avans}'";
+        }
+        if ($prof > 0) {
+            $sql .= "AND profaktura ='{$prof}'";
+        }
+        $query = $this->db->query($sql, $company);
+        return $query->result_array();
+    }
+     public function get_income($month=false)
+     {
+        $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
+        if(!$month==false){
+            $sql = "SELECT SUM(total) as total_in, currency
+            FROM invoices
+            where seller='Protech' AND MONTH(date) = '{$month}' GROUP BY currency";
+            $query = $this->db->query($sql);
+            return $query->result_array();
+        }
+        $sql = "SELECT SUM(total) as total_in, currency
+        FROM invoices
+        where seller='Protech' GROUP BY currency";
+        $query = $this->db->query($sql);
+        return $query->result_array();
+     }
+     public function get_outcome($month=false)
+     {
+        $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
+        if(!$month==false){
+            $sql = "SELECT SUM(total) as total_out, currency
+            FROM invoices
+            where buyer='Protech' AND MONTH(date) = '{$month}' GROUP BY currency";
+            $query = $this->db->query($sql);
+            // $query = $this->db->get('invoices');
+            return $query->result_array();
+        }
+        $sql = "SELECT SUM(total) as total_out, currency
+        FROM invoices
+        where buyer='Protech' GROUP BY currency";
+        $query = $this->db->query($sql);
+        // $query = $this->db->get('invoices');
+        return $query->result_array();
+     }
 }

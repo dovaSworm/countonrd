@@ -22,19 +22,18 @@
                         'logged_in' => true
                     );
                     $this->session->set_userdata($user_data);
-                    $this->session->set_flashdata('user_loged_in', 'U R loged in');
+                    $this->session->set_flashdata('info', 'Uspešno ste se ulogovali');
                     redirect('home');
+                }else{
+                    $this->session->set_flashdata('info', 'Pogrešno ime ili šifra');
+                    redirect('users/login');
                 }
             }
         }
 
         public function logout()
         {
-            $this->session->unset_userdata('logged_in');
-            $this->session->unset_userdata('user_id');
-            $this->session->unset_userdata('username');
-            // $user_data = array();
-            // $this->session->unset_userdata($user_data);
+            $this->session->sess_destroy();
             redirect('home');
         }
        

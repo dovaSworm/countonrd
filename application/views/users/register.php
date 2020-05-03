@@ -3,30 +3,32 @@
         redirect('users/login');
     }    
 ?>
-<div class="mytitle">
-    <h6 class="text-center my-1">CountOn<img src="<?php echo base_url().'/assets/img/sivibek.svg' ;?>" alt=""></h6>
+<div class="create-header">
+    <h4 class="text-center my-1">Registracija novog korisnika</h4>
 </div>
-<h3 class="text-center my-5">Registracija novog korisnika</h3>
-<div class="container">
+<div class="container create-wrapper">
     <?php echo validation_errors(); ?>
 
     <?php echo form_open('users/register'); ?>
-    <div class="col-sm-12 col-md-7 m-auto">
-        <div class="form-inline my-2">
+    <div class="row no-gutters flex-column align-items-center">
+        <div class="col-sm-12 col-md-4 col-lg-4 p-2">
             <label>Ime</label>
-            <input type="text" name="name" class="form-control" placeholder="Unesite ime">
+            <input type="text" name="name" class="form-control" placeholder="Unesite ime" required autofocus  oninvalid="this.setCustomValidity('Obavezno polje')"
+    oninput="this.setCustomValidity('')">
         </div>
-        <div class="form-inline my-2">
+        <div class="col-sm-12 col-md-4 col-lg-4 p-2">
             <label>Lozinka</label>
-            <input type="password" name="password" class="form-control" placeholder="Unesite lozinku">
+            <input type="password" name="password" class="form-control" placeholder="Unesite lozinku"required autofocus  oninvalid="this.setCustomValidity('Obavezno polje')"
+    oninput="this.setCustomValidity('')">
         </div>
-        <div class="form-inline my-2">
+        <div class="col-sm-12 col-md-4 col-lg-4 p-2">
             <label>Ponovljena lozinka</label>
-            <input type="password" name="password2" class="form-control" placeholder="Ponovite lozinku">
+            <input type="password" name="password2" class="form-control" placeholder="Ponovite lozinku"required autofocus  oninvalid="this.setCustomValidity('Obavezno polje')"
+    oninput="this.setCustomValidity('')">
         </div>
-        <div class="text-center">
+        <div class="col-sm-12 text-center">
             <button class="btn mybutton" type="submit">Unesi korisnika</button>
         </div>
-    <?php echo form_close(); ?>
     </div>
+        <?php echo form_close(); ?>
 </div>

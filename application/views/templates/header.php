@@ -14,80 +14,104 @@
     <!-- <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/img/ptefavicon.png"> -->
     <!-- <link rel="apple-touch-icon" href="<?php echo base_url(); ?>assets/img/ptefavicon.png"/> -->
     <!-- Latest compiled and minified CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+        rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.6.4/css/bootstrap-datepicker.standalone.min.css"
+        rel="stylesheet" />
 
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css"> -->
     <link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/style.css">
-    <title><?php echo isset($title) ? $title : ''; ?></title>
+    <link rel="stylesheet" href="<?php echo base_url(); ?>css/nav.css">
+    <title><?php echo isset($title) ? $title : 'CountOnRd'; ?></title>
 
 </head>
 
 <body>
 
-<nav class="navbar nav bg-dark fixed-top">
-  <div class="container">
-    <div class="d-flex">
-      <?php if (is_numeric($this->session->userdata('user_id'))): ;?>
-	        <li class="nav-item">
-	            <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/register"><i
-	                    class="far fa-user-circle"></i> Registracija</a>
-	        </li>
-	      <?php endif;?>
-      <li class="nav-item">
-          <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/login"><i
-                  class="far fa-user-circle"></i> Login</a>
-      </li>
-      <li class="nav-item">
-          <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/logout"><i
-                  class="far fa-user-circle"></i> Logout</a>
-      </li>
-    </div>
-    <li class="nav-item">
-          <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>">Početna</a>
-    </li>
-      <?php if (is_numeric($this->session->userdata('user_id'))): ;?>
-	  <div class="d-flex">
-        <div class="dropdown">
-          <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Artikli
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="<?php echo base_url(); ?>items/index">Pogledaj sve</a>
-            <a class="dropdown-item" href="<?php echo base_url(); ?>items/create">Unesi novi</a>
-          </div>
+    <nav>
+        <div class="logo-holder">
+        <img  src="<?php echo base_url().'/assets/img/logo5.png' ;?>" alt="logo"> 
         </div>
-        <div class="dropdown">
-          <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Kompanije
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="<?php echo base_url(); ?>companies/index">Pogledaj sve</a>
-            <a class="dropdown-item" href="<?php echo base_url(); ?>companies/create">Unesi novu</a>
-          </div>
+        <div class="container">
+            <div id="loging" class="d-flex" style="color:white">
+                <?php if (is_numeric($this->session->userdata('user_id'))): ;?>
+                <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/register"><i
+                        class="fas fa-user-plus fa-sm"></i> Registracija</a>
+                <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/logout"><i
+                        class="fas fa-user fa-sm"></i> Logout</a>
+                        <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>"><i class="fas fa-home home-btn"></i></a>
+                <?php endif;?>
+                <?php if (!is_numeric($this->session->userdata('user_id'))): ;?>
+                <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/login"><i
+                        class="fas fa-user fa-sm"></i> Login</a>
+                <?php endif;?>
+                <?php if (is_numeric($this->session->userdata('user_id'))): ;?>
+            </div>
+            <div class="hamburger">
+                <div class="wrapper">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li ><a class="nav-btn" href="#">Artikli</a>
+                    <ul class="sub-menu first-sub">
+                        <li>
+                            <a href="<?php echo base_url(); ?>items/index">Pogledaj sve</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>items/create">Unesi novi</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>items/stat">Statistika</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ><a class="nav-btn" href="#">Fakture</a>
+                    <ul class="sub-menu sec-sub">
+                        <li>
+                            <a href="<?php echo base_url(); ?>invoices/view_all">Pogledaj sve</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>invoices/index">Unesi novu</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>invoices/stat">Statistika</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ><a class="nav-btn" href="#">Kompanije</a>
+                    <ul class="sub-menu thr-sub">
+                        <li>
+                            <a href="<?php echo base_url(); ?>companies/index">Pogledaj sve</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>companies/create">Unesi novu</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>companies/stat">Statistika</a>
+                        </li>
+                    </ul>
+                </li>
+                <li ><a class="nav-btn" href="#">Ulazi</a>
+                    <ul class="sub-menu last-sub">
+                        <li>
+                            <a href="<?php echo base_url(); ?>entry/view_all">Pogledaj sve</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo base_url(); ?>entry/view">Novi ulaz</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <?php endif;?>
         </div>
-        <div class="dropdown">
-          <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Fakture
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="<?php echo base_url(); ?>invoices/view_all">Pogledaj sve</a>
-            <a class="dropdown-item" href="<?php echo base_url(); ?>invoices/index">Unesi novu</a>
-          </div>
-        </div>
-        <div class="dropdown">
-          <a class="btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Ulaz
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            <a class="dropdown-item" href="<?php echo base_url(); ?>entry/view_all">Pogledaj sve</a>
-            <a class="dropdown-item" href="<?php echo base_url(); ?>entry/index">Novi ulaz</a>
-          </div>
-      </div>
-	      <?php endif;?>
-    </div>
-  </div>
-</nav>
+    </nav>
+    <main>
