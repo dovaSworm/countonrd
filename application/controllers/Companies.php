@@ -16,7 +16,10 @@ class Companies extends CI_Controller
     }
     public function edit($id)
     {
-
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $naslov['title'] = 'Edit';
         $data['company'] = $this->company_model->get_one($id);
         if (empty($data['company'])) {
@@ -31,6 +34,10 @@ class Companies extends CI_Controller
 
     public function update()
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
         $this->form_validation->set_rules('pib', 'PIB', 'trim|required|min_length[9]|max_length[9]');
         $this->form_validation->set_rules('mb', 'MB', 'trim|required|min_length[8]|max_length[8]');
@@ -43,16 +50,20 @@ class Companies extends CI_Controller
         $this->form_validation->set_rules('phone', 'Phone', 'trim');
         $this->form_validation->set_rules('contact', 'Contact person', 'trim');
 
-        if(!empty($this->company_model->update_company())){
+        if (!empty($this->company_model->update_company())) {
             $this->session->set_flashdata('company_edited', 'Kompanija uspesno  izmenjena');
             redirect('companies/index');
-        }else{
+        } else {
             $this->db->display_errors();
         }
     }
 
     public function delete($id)
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $this->company_model->delete_company($id);
         $this->session->set_flashdata('company_deleted', 'Kompanija uspesno obrisana');
         redirect('home');
@@ -60,6 +71,7 @@ class Companies extends CI_Controller
 
     public function create()
     {
+
         $this->form_validation->set_rules('name', 'Name', 'trim|required');
         $this->form_validation->set_rules('pib', 'PIB', 'trim|required|min_length[9]|max_length[9]');
         $this->form_validation->set_rules('mb', 'MB', 'trim|required|min_length[8]|max_length[8]');
@@ -82,7 +94,7 @@ class Companies extends CI_Controller
             'phone' => !empty($this->input->post('phone')) ? $this->input->post('phone') : "",
             'bank' => !empty($this->input->post('bank')) ? $this->input->post('bank') : "",
             'account_num' => !empty($this->input->post('account-num')) ? $this->input->post('account-num') : "",
-            'contact' => !empty($this->input->post('contact')) ? $this->input->post('contact') : ""
+            'contact' => !empty($this->input->post('contact')) ? $this->input->post('contact') : "",
         );
 
         if ($this->form_validation->run() === false) {
@@ -90,6 +102,10 @@ class Companies extends CI_Controller
             $this->load->view('companies/company_create', $data);
             $this->load->view('templates/footer');
         } else {
+            $user = $this->session->userdata('user_id');
+            if (!is_numeric($user)) {
+                redirect('users/login');
+            }
             if ($this->company_model->create($data)) {
 
                 $this->session->set_flashdata('company_created', 'Kompanija  uspesno dodana u bazu');

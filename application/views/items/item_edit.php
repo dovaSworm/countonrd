@@ -3,13 +3,12 @@
         redirect('users/login');
     }    
 ?>
-<div class="create-header">
-    <h4>Izmeni proizvod</h4>
-</div>
-
-<div class="container create-wrapper">
+<div class="container create-wrapper myshadow">
+    <div class="create-header">
+        <h4>Izmeni proizvod</h4>
+    </div>
     <?php echo form_open('items/update'); ?>
-    <div class="row no-gutters">
+    <div class="row no-gutters p-3">
         <input type="hidden" name="id" value="<?php echo $item['id']; ?>">
         <div class="col-sm-12 col-md-4 col-lg-4 p-2">
             <label>Groupa proizvoda</label>

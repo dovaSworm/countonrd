@@ -84,6 +84,10 @@ class Entry extends CI_Controller
 
     public function update_item()
     {
+        $user = $this->session->userdata('user_id'); 
+        if(!is_numeric($user)){
+            redirect('users/login');
+        }
         $id=$this->uri->segment(3);
             if($id===null){
                 $this->session->set_flashdata('info', 'Prvo napraviti ulaz pa onda dodati artikle!');
@@ -148,6 +152,10 @@ class Entry extends CI_Controller
 
     public function make_pdf()
         {
+            $user = $this->session->userdata('user_id'); 
+            if(!is_numeric($user)){
+                redirect('users/login');
+            }
             $id=$this->uri->segment(3);
             if($id===null){
                 $id=false;
@@ -193,6 +201,10 @@ class Entry extends CI_Controller
 
         public function delete()
         {
+            $user = $this->session->userdata('user_id'); 
+            if(!is_numeric($user)){
+                redirect('users/login');
+            }
             $entry_id=$this->uri->segment(3);
             if($entry_id===null){
                 $entry_id=false;

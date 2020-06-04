@@ -11,8 +11,8 @@
     <meta name="keywords" content="">
     <!-- <meta name="google-site-verification" content="pMiLlWc0tbntvS3Ky6VZVY9rHKxaVqnqZHD8daTZEus" /> -->
     <link rel="canonical" href="" />
-    <!-- <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/img/ptefavicon.png"> -->
-    <!-- <link rel="apple-touch-icon" href="<?php echo base_url(); ?>assets/img/ptefavicon.png"/> -->
+    <link rel="icon" type="image/png" href="<?php echo base_url(); ?>assets/img/logo5.png">
+    <link rel="apple-touch-icon" href="<?php echo base_url(); ?>assets/img/logo5.png"/>
     <!-- Latest compiled and minified CSS -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
         rel="stylesheet" />
@@ -38,20 +38,19 @@
         <div class="logo-holder">
         <img  src="<?php echo base_url().'/assets/img/logo5.png' ;?>" alt="logo"> 
         </div>
-        <div class="container">
+        <div class="container p-0">
             <div id="loging" class="d-flex" style="color:white">
                 <?php if (is_numeric($this->session->userdata('user_id'))): ;?>
                 <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/register"><i
                         class="fas fa-user-plus fa-sm"></i> Registracija</a>
-                <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/logout"><i
+                <a class="nav-link" href="<?php echo base_url(); ?>users/logout"><i
                         class="fas fa-user fa-sm"></i> Logout</a>
-                        <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>"><i class="fas fa-home home-btn"></i></a>
+                        <a title="Počenta" class="nav-link" href="<?php echo base_url(); ?>"><i class="fas fa-home home-btn"></i></a>
                 <?php endif;?>
                 <?php if (!is_numeric($this->session->userdata('user_id'))): ;?>
-                <a title="samo za admina" class="nav-link" href="<?php echo base_url(); ?>users/login"><i
+                <a class="nav-link" href="<?php echo base_url(); ?>users/login"><i
                         class="fas fa-user fa-sm"></i> Login</a>
                 <?php endif;?>
-                <?php if (is_numeric($this->session->userdata('user_id'))): ;?>
             </div>
             <div class="hamburger">
                 <div class="wrapper">
@@ -61,7 +60,7 @@
                 </div>
             </div>
             <ul class="nav-links">
-                <li ><a class="nav-btn" href="#">Artikli</a>
+                <li class="nav-btn" >Artikli
                     <ul class="sub-menu first-sub">
                         <li>
                             <a href="<?php echo base_url(); ?>items/index">Pogledaj sve</a>
@@ -74,7 +73,7 @@
                         </li>
                     </ul>
                 </li>
-                <li ><a class="nav-btn" href="#">Fakture</a>
+                <li class="nav-btn" href="#">Fakture
                     <ul class="sub-menu sec-sub">
                         <li>
                             <a href="<?php echo base_url(); ?>invoices/view_all">Pogledaj sve</a>
@@ -87,7 +86,7 @@
                         </li>
                     </ul>
                 </li>
-                <li ><a class="nav-btn" href="#">Kompanije</a>
+                <li class="nav-btn" href="#">Kompanije
                     <ul class="sub-menu thr-sub">
                         <li>
                             <a href="<?php echo base_url(); ?>companies/index">Pogledaj sve</a>
@@ -100,7 +99,7 @@
                         </li>
                     </ul>
                 </li>
-                <li ><a class="nav-btn" href="#">Ulazi</a>
+                <li class="nav-btn" href="#">Ulazi
                     <ul class="sub-menu last-sub">
                         <li>
                             <a href="<?php echo base_url(); ?>entry/view_all">Pogledaj sve</a>
@@ -111,7 +110,6 @@
                     </ul>
                 </li>
             </ul>
-            <?php endif;?>
         </div>
     </nav>
     <main>

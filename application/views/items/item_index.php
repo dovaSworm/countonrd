@@ -1,8 +1,3 @@
-<?php $user = $this->session->userdata('user_id'); 
-    if(!is_numeric($user)){
-        redirect('users/login');
-    }    
-?>
 <?php if ($this->session->flashdata('item_deleted')): ?>
 <?php echo '<p class="alert alert-success">' . $this->session->flashdata('item_deleted') . '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'; ?>
 <?php endif;?>

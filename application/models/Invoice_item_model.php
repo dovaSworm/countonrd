@@ -95,10 +95,10 @@ class Invoice_item_model extends CI_Model
         return $query->result_array();
     }
 
-    public function items_total()
+    public function items_total($group)
     {
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
-        $sql = "SELECT ii.name, COUNT(ii.quantity) as quantity, SUM(ii.total) as total FROM invoice_items ii JOIN invoices i ON ii.inv_id = i.id GROUP BY ii.name ORDER BY total DESC LIMIT 7";
+        $sql = "SELECT ii.name, SUM(ii.quantity) as quantity, SUM(ii.total) as total FROM invoice_items ii JOIN invoices i ON ii.inv_id = i.id JOIN items it ON ii.item_id = it.id WHERE it.group_id = $group GROUP BY ii.name ORDER BY total DESC LIMIT 7";
         $query = $this->db->query($sql);
         if ($query->num_fields() > 0) {
             return $query->result_array();

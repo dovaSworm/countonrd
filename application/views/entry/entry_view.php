@@ -1,8 +1,3 @@
-<?php $user = $this->session->userdata('user_id'); 
-    if(!is_numeric($user)){
-        redirect('users/login');
-    }    
-?>
 <script>
 function showItem() {
     var itemId = document.getElementById('item').value;
@@ -44,18 +39,17 @@ function findItems() {
     xmlhttp.send();
 }
 </script>
-
-<div class="create-header">
-    <h4>ULAZ I KALKULACIJA CENA</h4>
-</div>
-<div class="container entry">
+<div class="container entry myshadow">
+    <div class="create-header">
+        <h4>ULAZ I KALKULACIJA CENA</h4>
+    </div>
     <?php if ($this->session->flashdata('info')): ?>
     <?php echo '<p class="alert alert-warning">' . $this->session->flashdata('info') . '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'; ?>
     <?php endif;?>
     <div id="entry-data" class="row no-gutters">
         <?php echo form_open('entry/credit/'.$entry['id']); ?>
         <div class="d-flex flex-wrap">
-            <div class="px-3 col-12">
+            <div class="px-3 col-12 font-italic">
                 <h6>Unesi novi ili izmeni postojeći ulaz</h6>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4  my-2">
@@ -84,6 +78,9 @@ function findItems() {
     <div class="entry-item-box">
         <?php echo form_open('entry/update_item/' . $entry['id']); ?>
         <div class="row align-items-center no-gutters">
+        <div class="px-3 col-12 font-italic">
+                <h6>Artikal za ulaz</h6>
+            </div>
             <div class="input-wrapper col-sm-12 col-md-6 pr-md-5 my-3">
                 <label>Nađi artikal</label>
                 <input type="text" class="form-control" id="item-hint" name="item-hint" oninput="findItems();">
@@ -208,7 +205,7 @@ function findItems() {
         </table>
     </div>
     <div class="text-center">
-        <a class="my-2 btn-sec text-uppercase"
+        <a class="my-2 btn-sec"
             href="<?php echo base_url() . 'entry/make_pdf/' . $entry['id']; ?>">Napravi pdf ulaz</a>
     </div>
 </div>

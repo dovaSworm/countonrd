@@ -27,6 +27,10 @@ body {
     }
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 p {
     margin-bottom: 0!important;
 }
@@ -44,26 +48,36 @@ a:hover {
     color: inherit;
 }
 
+.myshadow {
+    box-shadow: 3px 1px 16px 0px rgba(220, 220, 220, .8);
+}
+
 .btn-sec {
     border-top: 1px solid #5e5f63;
     border-right: 2px solid #5e5f63;
-    border-bottom: 2px solid #5e5f63;
+    border-bottom: 4px solid #5e5f63;
     border-left: 1px solid #5e5f63;
     padding: 6px 8px;
-    border-radius: 4px;
+    border-radius: 18px;
     color: rgb(53, 52, 52);
 }
 
 .btn-sec:hover {
-    /* border: 2px solid #7c7c7c; */
     background: whitesmoke;
     color: #000000;
 }
 
+.btn-sec,
+.mybutton,
+.add-item {
+    text-transform: uppercase;
+}
+
 .mybutton {
+    border-radius: 18px;
     border-top: 1px solid #5e5f63;
     border-right: 2px solid #5e5f63;
-    border-bottom: 2px solid #5e5f63;
+    border-bottom: 4px solid #5e5f63;
     border-left: 1px solid #5e5f63;
     line-height: 1.45;
     color: white;
@@ -78,12 +92,12 @@ a:hover {
 
 .add-item {
     padding: 6px 8px;
-    border-radius: 4px;
+    border-radius: 18px;
     background: white;
     color: #368fdc;
     border-top: 1px solid #368fdc;
     border-right: 2px solid #368fdc;
-    border-bottom: 2px solid #368fdc;
+    border-bottom: 4px solid #368fdc;
     border-left: 1px solid #368fdc;
 }
 
@@ -97,9 +111,10 @@ a:hover {
     border: 1px solid #ced4da;
 }
 
-input,
+div>input,
+.search input,
 div.form-control,
-select {
+div>select {
     border-radius: 18px!important;
 }
 
@@ -109,8 +124,6 @@ input[autofocus] {
 
 input[type=checkbox] {
     width: 20px!important;
-    /* margin-right: calc(65% + 6px); */
-    /* margin-right: 65%; */
 }
 
 .form-control {
@@ -127,11 +140,14 @@ form {
 
 caption {
     caption-side: top;
-    /* border-bottom: none!important; */
 }
 
 .cont-stat .table th {
     border: none!important;
+}
+
+.container {
+    padding: 0;
 }
 
 .container#entry-table table,
@@ -158,21 +174,18 @@ caption {
     font-weight: bold!important;
 }
 
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(235, 235, 235, 0.28);
+}
+
 th {
     font-size: 16px;
 }
 
 ul {
     /* list-style: "➖"; */
-    /* color: black; */
     list-style: none;
     padding-inline-start: 0!important;
-}
-
-.create-wrapper {
-    border-radius: 3px;
-    background: aliceblue;
-    padding: 20px 0;
 }
 
 i {
@@ -221,18 +234,24 @@ button.view-item a:hover {
     margin-right: auto;
 }
 
+.create-wrapper {
+    border-radius: 3px;
+    background: aliceblue;
+    padding: 20px 0;
+    margin-top: 10vh;
+}
+
 .create-header h2 {
     width: fit-content;
     margin: auto;
     text-transform: uppercase;
     padding: 0 15px 6px 15px;
     border-bottom: 3px solid #71477a;
-    /* text-align: center; */
-    margin-bottom: 80px;
+    margin-top: 10vh;
+    margin-bottom: 60px;
 }
 
 .input-wrapper {
-    /* margin: auto; */
     flex-wrap: nowrap;
     align-items: center;
     display: flex;
@@ -245,6 +264,7 @@ button.view-item a:hover {
 }
 
 .entry {
+    margin-top: 10vh;
     background: aliceblue;
     padding: 20px 0;
 }
@@ -269,13 +289,16 @@ div.inv-item-box {
     flex-wrap: wrap;
     display: flex;
     padding: 15px;
-    /* border: 2px solid gray; */
     border-radius: 3px;
 }
 
 div.inv-item-box {
+    flex-wrap: wrap;
+    border-radius: 3px;
     margin-top: 20px;
-    background: aliceblue;
+    padding: 15px;
+    padding-top: 30px;
+    border-top: 1px dotted gray;
 }
 
 div.pagination-links {
@@ -300,7 +323,6 @@ div.pagination-links li a {
 
 .foo-logo {
     color: rgb(130, 219, 251);
-    /* width: fit-content; */
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -308,7 +330,6 @@ div.pagination-links li a {
     bottom: 0;
     width: 100%;
     background-color: rgb(18, 31, 45);
-    /* padding-bottom: 10px; */
 }
 
 .foo-logo p:first-child {
@@ -324,9 +345,6 @@ div.pagination-links li a {
 .hom-sec {
     margin-bottom: 100px;
     margin-top: 100px;
-    /* height: 92vh; */
-    /* background: url(../img/zlatan.jpg) no-repeat center center/cover; */
-    /* background-size: ; */
 }
 
 .hom-sec ul li {
@@ -334,7 +352,6 @@ div.pagination-links li a {
 }
 
 .hom-why {
-    /* display: flex; */
     margin-top: 100px;
 }
 
@@ -367,13 +384,6 @@ div.pagination-links li a {
 
 #hom-title {
     font-family: 'Tinos', serif;
-    /* font-family: 'Old Standard TT', serif; */
-    /* font-family: 'Bevan', cursive; */
-    /* font-family: 'Racing Sans One', cursive; */
-    /* font-family: 'Emblema One', cursive; */
-    /* font-family: 'Montserrat', sans-serif; */
-    /* font-weight: 400; */
-    /* font-style: italic; */
     text-align: center;
     font-size: 7.47rem;
 }
@@ -382,39 +392,9 @@ div.pagination-links li a {
     color: #74147a;
 }
 
-
-/* .home-menu {
-    color: white;
-    z-index: 3333;
-    display: flex;
-    list-style: none;
-    justify-content: space-between;
-    align-items: baseline;
-    padding-top: 40px;
-    padding-left: 5px;
-    left: 0;
-    position: absolute;
-    background: rgb(18, 31, 45);
-    height: 17vh;
-    width: 100%;
-    min-height: 102px;
-    flex-direction: row;
-    clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-    transition: all 1s ease-out;
-    pointer-events: none;
-}
-
-.home-menu.open {
-    z-index: 333;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-    -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
-    pointer-events: all;
-} */
-
 .search {
     padding: 15px 0 10px 10px;
-    background-color: #f2f2f2;
+    background-color: #f9f9f9;
 }
 
 .search h6 {
@@ -432,9 +412,7 @@ div.pagination-links li a {
 
 .create-header {
     text-align: center;
-    margin-top: 10vh;
     padding-bottom: 20px;
-    /* margin-bottom: 40px; */
 }
 
 .create-header h4 {
@@ -442,7 +420,6 @@ div.pagination-links li a {
     margin: auto;
     margin-bottom: 0;
     padding: 15px;
-    background: aliceblue;
     text-transform: uppercase;
 }
 
@@ -509,6 +486,9 @@ div.pagination-links li a {
     }
     .input-wrapper label {
         margin-bottom: 3px;
+    }
+    div.inv-item-box {
+        padding-top: 15px;
     }
     .foo-logo {
         position: relative;

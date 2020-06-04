@@ -66,13 +66,13 @@ class Company_model extends CI_Model
         if(!$month==false){
         $sql = "SELECT SUM(total) as total_in, buyer, SUM(due) as due, COUNT(inv_num) as inv_num
         FROM invoices
-        where seller='Protech' AND MONTH(date) = '{$month}' GROUP BY buyer";
+        where seller='16' AND MONTH(date) = '{$month}' GROUP BY buyer";
             $query = $this->db->query($sql);
             return $query->result_array();
         }
         $sql = "SELECT SUM(total) as total_in, buyer, SUM(due) as due, COUNT(inv_num) as inv_num
             FROM invoices
-            where seller='Protech' GROUP BY buyer";
+            where seller='16' GROUP BY buyer";
             $query = $this->db->query($sql);
             return $query->result_array();
     }
@@ -82,13 +82,13 @@ class Company_model extends CI_Model
         if(!$month==false){
         $sql = "SELECT SUM(total) as total_out, seller, SUM(due) as due, COUNT(inv_num) as inv_num
         FROM invoices as i
-        where buyer='Protech' AND MONTH(date) = '{$month}' GROUP BY seller";
+        where buyer='16' AND MONTH(date) = '{$month}' GROUP BY seller";
             $query = $this->db->query($sql);
             return $query->result_array();
         }
         $sql = "SELECT SUM(total) as total_out, seller, SUM(due) as due, COUNT(inv_num) as inv_num
             FROM invoices as i
-            where buyer='Protech' GROUP BY seller";
+            where buyer='16' GROUP BY seller";
             $query = $this->db->query($sql);
             return $query->result_array();
     }

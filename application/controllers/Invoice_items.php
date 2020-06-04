@@ -101,8 +101,6 @@
             $data['invoice'] = $this->invoice_model->get_invoice_and_companies($id);
             $this->session->set_flashdata('invoice2', $data['invoice']);
             $data['items'] = $this->invoice_item_model->get_inv_items($id);
-            // echo json_encode($data);
-            // echo json_encode($data['invoice']);
         }
 
     }

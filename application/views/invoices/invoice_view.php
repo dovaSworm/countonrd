@@ -35,12 +35,12 @@ function findItems() {
 <?php echo '<p class="alert alert-success">' . $this->session->flashdata('invoice_created') . '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'; ?>
 <?php endif;?>
 <!-- <img src="https://github.com/dovaSworm/front-end/blob/master/Pipboy/img/angry.jpg?raw=true" alt=""> -->
-<div id="entry-table" class="container-fluid p-2 mb-5">
-    <div class="create-header">
-        <h4>Izrada i modifikacija fakture</h4>
-    </div>
-    <div class="container create-wrapper">
-        <div class="m-auto pl-2">
+
+    <div class="container create-wrapper myshadow">
+        <div class="create-header">
+            <h4>Izrada i modifikacija fakture</h4>
+        </div>
+        <div class="m-auto pl-4">
             <label>Vrsta dokumenta:</label>
             <?php if ($invoice['avans'] == 1): ?>
             <span class="text-uppercase">Avansni račun</span>
@@ -51,13 +51,13 @@ function findItems() {
             <?php endif;?>
         </div>
         <?php echo form_open('invoices/update/' . $invoice['id']); ?>
-        <div class="row no-gutters">
+        <div class="row no-gutters p-3">
             <div class="col-sm-12 col-md-4 col-lg-3 p-2">
 
                 <label>Prodavac</label>
                 <select name="seller" id="seller" class="form-control">
                     <?php foreach ($companies as $key => $value): ?>
-                    <option value="<?= $value['name'] ?>" <?= $value['name']==$invoice['sellername']? "selected":""?>>
+                    <option value="<?= $value['id'] ?>" <?= $value['name']==$invoice['sellername']? "selected":""?>>
                         <?= $value['name'] ?> </option>
                     <?php endforeach;?>
                 </select>
@@ -66,7 +66,7 @@ function findItems() {
                 <label>Kupac</label>
                 <select name="buyer" id="buyer" class="form-control">
                     <?php foreach ($companies as $key => $value): ?>
-                    <option value="<?= $value['name'] ?>" <?= $value['name']==$invoice['buyername']? "selected":""?>>
+                    <option value="<?= $value['id'] ?>" <?= $value['name']==$invoice['buyername']? "selected":""?>>
                         <?= $value['name'] ?> </option>
                     <?php endforeach;?>
                 </select>
@@ -105,38 +105,36 @@ function findItems() {
             <?php echo form_close(); ?>
         </div>
         <!--row -->
-    </div>
-
-    <?php if ($invoice['avans'] == 0): ?>
-    <div class="container inv-item-box">
-        <?php echo form_open('invoice_items/create/' . $invoice['id']); ?>
-        <div class="row align-items-center no-gutters">
-            <div class="input-wrapper col-sm-12 col-md-6 text-center my-3">
-                <label>Nađi artikal</label>
-                <input type="text" class="form-control" id="item-hint" name="item-hint" oninput="findItems();">
-            </div>
-            <div class="input-wrapper col-sm-12 text-center col-md-6 " id="hints">
-            </div>
-            <div class="input-wrapper text-center col-sm-12 col-md-6">
-                <label>Dodaj artikal</label>
-                <?php if (form_error('item')) {
-    echo '<div class="alert alert-warning">' . form_error('item') . '</div>';
-}?>
-                <div class="d-flex">
-                    <select name="item" id="item" class="form-control">
-                        <?php foreach ($items as $key => $value): ?>
-                        <option value="<?php echo $item = $value['id']; ?>"><?php echo $value['name']; ?></option>
-                        <?php endforeach;?>
-                    </select>
+        <div class="inv-item-box">
+            <?php echo form_open('invoice_items/create/' . $invoice['id']); ?>
+            <div class="row align-items-center no-gutters">
+                <div class="input-wrapper col-sm-12 col-md-6 text-center my-3">
+                    <label>Nađi artikal</label>
+                    <input type="text" class="form-control" id="item-hint" name="item-hint" oninput="findItems();">
                 </div>
-                <button title="Add article" id="add-item-btn"
-                    class="ml-2 btn bnt-primary text-primary text-uppercase" type="submit"><i
-                        class="fas fa-plus"></i></button>
+                <div class="input-wrapper col-sm-12 text-center col-md-6 " id="hints">
+                </div>
+                <div class="input-wrapper text-center col-sm-12 col-md-6">
+                    <label>Dodaj artikal</label>
+                    <?php if (form_error('item')) {
+        echo '<div class="alert alert-warning">' . form_error('item') . '</div>';
+    }?>
+                    <div class="d-flex">
+                        <select name="item" id="item" class="form-control">
+                            <?php foreach ($items as $key => $value): ?>
+                            <option value="<?php echo $item = $value['id']; ?>"><?php echo $value['name']; ?></option>
+                            <?php endforeach;?>
+                        </select>
+                        <button title="Add article" id="add-item-btn"
+                            class="ml-2 btn bnt-primary text-primary text-uppercase" type="submit"><i
+                                class="fas fa-plus"></i></button>
+                    </div>
+                </div>
+                <?php echo form_close(); ?>
             </div>
-            <?php echo form_close(); ?>
         </div>
     </div>
-
+<div id="entry-table" class="container-fluid p-1 p-md-3 mb-5">
     <div class="table-responsive table-striped table-borderless w-auto my-3">
         <table class="table">
             <thead>
@@ -193,12 +191,8 @@ function findItems() {
             </tbody>
         </table>
     </div>
-    <?php endif;?>
-
     <div class="text-center">
-        <a class="my-3 btn-sec text-uppercase"
-            href="<?php echo base_url() . 'invoices/make_pdf/' . $invoice['id']; ?>">Napravi pdf
+        <a class="my-3 btn-sec" href="<?php echo base_url() . 'invoices/make_pdf/' . $invoice['id']; ?>">Napravi pdf
             fakturu</a>
     </div>
 </div><!-- faktura -->
-</div><!-- container -->

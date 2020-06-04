@@ -17,7 +17,7 @@ $(document).ready(function() {
     });
     $('.nav-links li').click(function() {
         $('ul', $(this)).toggleClass('showmy');
-        $('a.nav-btn', $(this)).toggleClass('show-border');
+        $(this).toggleClass('show-border');
     });
     setTimeout(() => {
 

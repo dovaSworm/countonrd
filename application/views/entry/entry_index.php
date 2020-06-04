@@ -1,8 +1,3 @@
-<?php $user = $this->session->userdata('user_id'); 
-    if(!is_numeric($user)){
-        redirect('users/login');
-    }    
-?>
 <div class="create-header">
     <h2>Ulazi</h2>
 </div>

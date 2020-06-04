@@ -1,4 +1,3 @@
-
 <section class="hom-sec">
     <div class="mytitle container">
         <h4 id="hom-welc">Dobrodošli, RD design predstavlja</h4>

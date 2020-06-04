@@ -1,8 +1,3 @@
-<?php $user = $this->session->userdata('user_id');
-if (!is_numeric($user)) {
-    redirect('users/login');
-}
-?>
 <div class="create-header">
     <h4>Statistika artikli</h4>
 </div>
@@ -10,14 +5,33 @@ if (!is_numeric($user)) {
     <div class="row no-gutters">
     <div class="col-sm-12 col-md-6 p-1">
             <table class="table">
-                <caption>Prodaja ukupno</caption>
+                <caption>Ukupno artikli</caption>
                 <tbody>
                     <tr>
                         <th>Naziv</th>
                         <th>Komada</th>
                         <th>Vrednost</th>
                     </tr>
-                    <?php foreach ($items_total as $key => $value): ?>
+                    <?php foreach ($items_total_articles as $key => $value): ?>
+                    <tr>
+                        <td><?php echo $value['name']; ?></td>
+                        <td><?php echo $value['quantity']; ?></td>
+                        <td><?php echo $value['total']; ?></td>
+                    <tr>
+                        <?php endforeach;?>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-12 col-md-6 p-1">
+            <table class="table">
+                <caption>Ukupno usluge</caption>
+                <tbody>
+                    <tr>
+                        <th>Naziv</th>
+                        <th>Komada</th>
+                        <th>Vrednost</th>
+                    </tr>
+                    <?php foreach ($items_total_services as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
                         <td><?php echo $value['quantity']; ?></td>

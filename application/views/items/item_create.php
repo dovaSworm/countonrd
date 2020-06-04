@@ -1,15 +1,9 @@
-<?php $user = $this->session->userdata('user_id'); 
-    if(!is_numeric($user)){
-        redirect('users/login');
-    }    
-?>
-<div class="create-header">
-    <h4>Unesi novi artikal</h4>
-</div>
-
-<div class="container create-wrapper">
+<div class="container create-wrapper myshadow">
+    <div class="create-header">
+        <h4>Unesi novi artikal</h4>
+    </div>
     <?php echo form_open('items/create'); ?>
-<div class="row no-gutters">
+<div class="row no-gutters p-3">
     <div class="col-sm-12 col-md-4 col-lg-4 p-2">
         <label>Groupa proizvoda</label>
         <?php  if(form_error('group-id')) echo '<div class="alert alert-warning">' . form_error('group-id'). '</div>'; ?> 

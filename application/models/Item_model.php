@@ -101,13 +101,13 @@ class Item_model extends CI_Model
     {
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
         if($x == 0){
-            $sql = "SELECT items.id, items.name, items.quantity FROM items WHERE items.quantity = $x ORDER BY items.quantity DESC";
+            $sql = "SELECT items.id, items.name, items.quantity FROM items WHERE items.quantity = $x AND items.group_id = 1 ORDER BY items.quantity DESC";
             $query = $this->db->query($sql);
             if ($query->num_fields() > 0) {
                 return $query->result_array();
             } 
         }
-        $sql = "SELECT items.id, items.name, items.quantity FROM items WHERE items.quantity <$x AND items.quantity > 0 ORDER BY items.quantity DESC";
+        $sql = "SELECT items.id, items.name, items.quantity FROM items WHERE items.quantity <$x AND items.quantity > 0 AND items.group_id = 1 ORDER BY items.quantity DESC";
         $query = $this->db->query($sql);
         if ($query->num_fields() > 0) {
             return $query->result_array();

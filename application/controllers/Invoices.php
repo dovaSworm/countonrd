@@ -60,6 +60,11 @@ class Invoices extends CI_Controller
 
     public function create()
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
+
         $this->form_validation->set_rules('inv-num', 'Inovice number', 'required');
         $this->form_validation->set_rules('date', 'Date', 'trim|required');
         $this->form_validation->set_rules('seller', 'Seller', 'trim|required');
@@ -122,6 +127,10 @@ class Invoices extends CI_Controller
     }
     public function update()
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $id = $this->uri->segment(3);
         if ($id === null) {
             $id = false;
@@ -168,6 +177,10 @@ class Invoices extends CI_Controller
 
     public function delete()
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $id = $this->uri->segment(3);
         if ($id === null) {
             $id = false;
@@ -330,7 +343,7 @@ class Invoices extends CI_Controller
         $avans = !empty($this->input->post('avans')) ? 1 : 0;   
         $company = $this->input->post('company');
         $data = $this->invoice_stat_monthly();
-        $data['company'] = $company;
+        $data['company'] = $this->company_model->get_one($this->input->post('company'));
         $data['bors'] = $bors;
         $data['companies'] = $this->company_model->get_companies();
         $data['invoices'] = $this->invoice_model->get_inv_num_for_company($company, $bors, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof);

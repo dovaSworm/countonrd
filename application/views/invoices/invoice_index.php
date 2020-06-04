@@ -1,30 +1,22 @@
-<?php $user = $this->session->userdata('user_id');
-if (!is_numeric($user)) {
-    redirect('users/login');
-}
-?>
 <div class="create-header">
     <h2>FAKTURE</h2>
 </div>
 
 <div class="container">
-    <!-- <div class="row">
-        <div class="col-sm-12 col-md-3"></div>
-    </div> -->
-    <div class="col-sm-12 table-responsive">
-        <table class="table table-striped w-auto m-auto" id="mydata">
+    <div class="table-responsive p-1 p-md-0">
+        <table class="table table-striped" id="mydata">
             <thead>
                 <tr>
-                    <th style="border: none;">Vrsta</th>
-                    <th style="border: none;">Broj fakture</th>
+                    <th>Vrsta</th>
+                    <th>Broj fakture</th>
                     <th style="width: 15%;">Prodavac</th>
                     <th style="width: 15%;">Kupac</th>
-                    <th style="border: none;">Datum fakture</th>
-                    <th style="border: none;">Datum dospeća</th>
-                    <th style="border: none;">Ukupno za uplatu</th>
-                    <th style="border: none;">Plaćeno</th>
-                    <th style="border: none;">Duguje</th>
-                    <th style="border: none;"  colspan="3" class="text-center">Akcije</th>
+                    <th>Datum fakture</th>
+                    <th>Datum dospeća</th>
+                    <th>Ukupno za uplatu</th>
+                    <th>Plaćeno</th>
+                    <th>Duguje</th>
+                    <th  colspan="3" class="text-center">Akcije</th>
                     
                 </tr>
             </thead>

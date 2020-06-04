@@ -1,14 +1,9 @@
-<?php $user = $this->session->userdata('user_id'); 
-    if(!is_numeric($user)){
-        redirect('users/login');
-    }    
-?>
-<div class="create-header">
-    <h4>Unesi novu kompaniju</h4>
-</div>
-<div class="container create-wrapper">
+<div class="container create-wrapper myshadow">
+    <div class="create-header">
+        <h4>Unesi novu kompaniju</h4>
+    </div>
     <?php echo form_open('companies/create'); ?>
-    <div class="row no-gutters">
+    <div class="row no-gutters p-3">
         <div class="col-sm-12 col-md-4 col-lg-4 p-2">
             <label>Naziv</label>
             <input type="text" name="name" class="form-control" value="<?php echo set_value('name', ''); ?>"

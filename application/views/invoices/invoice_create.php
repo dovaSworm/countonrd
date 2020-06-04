@@ -1,14 +1,10 @@
-<?php $user = $this->session->userdata('user_id'); 
-    if(!is_numeric($user)){
-        redirect('users/login');
-    }    
-?>
-<div class="create-header">
-    <h4>Unesi novu fakturu</h4>
-</div>
-<div class="container create-wrapper">
+
+<div class="container create-wrapper myshadow">
+    <div class="create-header">
+        <h4>Unesi novu fakturu</h4>
+    </div>
     <?php echo form_open('invoices/create'); ?>
-    <div class="row no-gutters">
+    <div class="row no-gutters p-3">
         <div class="col-sm-12 col-md-2 col-lg-2 p-2 d-flex align-items-center">
             <label>Profaktura</label>
             <?php if (form_error('profaktura')) {
@@ -52,7 +48,7 @@
     ?>
             <select name="seller" id="seller" class="form-control">
                 <?php foreach ($companies as $key => $value): ?>
-                <option value="<?php echo $value['name']; ?>"><?php echo $value['name']; ?></option>
+                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                 <?php endforeach;?>
             </select>
         </div>
@@ -64,7 +60,7 @@
     ?>
             <select name="buyer" id="buyer" class="form-control">
                 <?php foreach ($companies as $key => $value): ?>
-                <option value="<?php echo $value['name']; ?>"><?php echo $value['name']; ?></option>
+                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                 <?php endforeach;?>
             </select>
         </div>

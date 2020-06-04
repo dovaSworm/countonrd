@@ -19,7 +19,7 @@ class Invoice_model extends CI_Model
         } else {
             $sql = "SELECT invoices.date, invoices.avans, invoices.due, invoices.payed, invoices.profaktura, invoices.letters, invoices.id, invoices.total,
             invoices.inv_num, invoices.currency, invoices.notes, invoices.pay_deadline, invoices.discount, c.name as buyername, c.mb as buyermb, c.pib as buyerpib, c.adress as buyeradress, c.city as buyercity, c.zip_code as buyerzip,
-             c2.name as sellername, c2.pib sellerpib, c2.mb sellermb, c2.phone sellerphone, c2.account_num selleracc_num, c2.bank sellerbank, c2.email selleremail, c2.adress as selleradress, c2.city sellercity, c2.account_num selleraccount, c2.zip_code as sellerzip FROM invoices INNER JOIN companies c ON c.name = invoices.buyer INNER JOIN companies c2 ON c2.name = invoices.seller where invoices.id = ?";
+             c2.name as sellername, c2.pib sellerpib, c2.mb sellermb, c2.phone sellerphone, c2.account_num selleracc_num, c2.bank sellerbank, c2.email selleremail, c2.adress as selleradress, c2.city sellercity, c2.account_num selleraccount, c2.zip_code as sellerzip FROM invoices INNER JOIN companies c ON c.id = invoices.buyer INNER JOIN companies c2 ON c2.id = invoices.seller where invoices.id = ?";
             $query = $this->db->query($sql, $id);
             if ($query->num_fields() > 0) {
                 return $query->row_array();
@@ -61,8 +61,8 @@ class Invoice_model extends CI_Model
             $this->db->limit($limit, $offset);
         }
         $this->db->select('invoices.*, c.name AS buyername, cc.name AS sellername');
-        $this->db->join('companies c', 'invoices.buyer = c.name','left');
-        $this->db->join('companies cc', 'invoices.seller = cc.name','left');
+        $this->db->join('companies c', 'invoices.buyer = c.id','left');
+        $this->db->join('companies cc', 'invoices.seller = cc.id','left');
         $query = $this->db->get('invoices');
         return $query->result_array();
     }
@@ -128,13 +128,13 @@ class Invoice_model extends CI_Model
         if(!$month==false){
             $sql = "SELECT SUM(total) as total_in, currency
             FROM invoices
-            where seller='Protech' AND MONTH(date) = '{$month}' GROUP BY currency";
+            where seller='16' AND MONTH(date) = '{$month}' GROUP BY currency";
             $query = $this->db->query($sql);
             return $query->result_array();
         }
         $sql = "SELECT SUM(total) as total_in, currency
         FROM invoices
-        where seller='Protech' GROUP BY currency";
+        where seller='16' GROUP BY currency";
         $query = $this->db->query($sql);
         return $query->result_array();
      }
@@ -144,14 +144,14 @@ class Invoice_model extends CI_Model
         if(!$month==false){
             $sql = "SELECT SUM(total) as total_out, currency
             FROM invoices
-            where buyer='Protech' AND MONTH(date) = '{$month}' GROUP BY currency";
+            where buyer='16' AND MONTH(date) = '{$month}' GROUP BY currency";
             $query = $this->db->query($sql);
             // $query = $this->db->get('invoices');
             return $query->result_array();
         }
         $sql = "SELECT SUM(total) as total_out, currency
         FROM invoices
-        where buyer='Protech' GROUP BY currency";
+        where buyer='16' GROUP BY currency";
         $query = $this->db->query($sql);
         // $query = $this->db->get('invoices');
         return $query->result_array();

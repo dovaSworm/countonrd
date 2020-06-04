@@ -1,8 +1,3 @@
-<?php $user = $this->session->userdata('user_id');
-if (!is_numeric($user)) {
-    redirect('users/login');
-}
-?>
 <div class="create-header">
     <h4>Statistika fakture</h4>
 </div>
@@ -31,7 +26,7 @@ if (!is_numeric($user)) {
             <label>Kompanija</label>
             <select name="company" id="company" class="form-control">
                 <?php foreach ($companies as $key => $value): ?>
-                <option value="<?php echo $value['name']; ?>"><?php echo $value['name']; ?></option>
+                <option value="<?php echo $value['id']; ?>"><?php echo $value['name']; ?></option>
                 <?php endforeach;?>
             </select>
         </div>
@@ -79,7 +74,7 @@ if (!is_numeric($user)) {
                 <div class="d-md-flex ">
                     <?php if (!empty($company)): ;?>
                     <p class="mr-md-3">Kompanija: </p>
-                    <h5><?php echo $company; ?></h5>
+                    <h5><?php echo $company['name']; ?></h5>
                 </div>
                 <div class="d-md-flex ">
                     <p class="mr-md-3"> Uloga: </p>

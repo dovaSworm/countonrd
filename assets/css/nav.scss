@@ -1,11 +1,17 @@
-nav a:hover {
+nav li:hover,
+nav a.nav-link:hover {
     text-decoration: none;
     color: #9de0ec;
 }
 
-nav li>a {
+nav li {
+    cursor: pointer;
     color: white;
     text-transform: uppercase;
+}
+
+.nav-links>li {
+    padding: 5px;
 }
 
 nav {
@@ -20,7 +26,7 @@ nav {
     li {
         list-style: none;
     }
-    a.nav-btn {
+    li.nav-btn {
         transition: 0.5s border ease-in;
         padding: 5px 5px;
         margin: 1px 2px;
@@ -28,7 +34,7 @@ nav {
         border-right: 1px solid transparent;
         border-left: 1px solid transparent;
     }
-    a.nav-btn.show-border {
+    li.nav-btn.show-border {
         border-top: 1px solid white;
         border-right: 1px solid white;
         border-left: 1px solid white;
@@ -46,7 +52,7 @@ nav {
 }
 
 #loging {
-    padding-left: 10px;
+    margin-left: -13px;
     position: absolute;
     align-items: center;
     height: 100%;
@@ -60,7 +66,7 @@ nav {
     opacity: 0;
     background: rgb(18, 31, 45);
     margin-top: 8px;
-    margin-left: 2px;
+    margin-left: -6px;
     border: 1px solid white;
     padding: 5px!important;
     -webkit-box-shadow: 0px 0px 0px 3px rgb(18, 31, 45), 0px 0px 0px 2px white;
@@ -118,14 +124,14 @@ nav {
     height: 5px;
     z-index: 1;
     top: -5px;
-    left: 77px;
+    left: 78px;
     background-color: white;
 }
 
 .sec-sub:after {
     content: " ";
     position: absolute;
-    width: 77px;
+    width: 78px;
     height: 5px;
     z-index: 1;
     top: -5px;
@@ -184,7 +190,7 @@ nav {
     height: 5px;
     z-index: 1;
     top: -5px;
-    margin-left: 58px;
+    margin-left: 59px;
     background-color: white;
 }
 
@@ -218,7 +224,7 @@ nav {
     height: 5px;
     z-index: 1;
     top: -5px;
-    left: 64px;
+    left: 63px;
     background-color: white;
 }
 
@@ -251,14 +257,14 @@ nav {
     height: 5px;
     z-index: 1;
     top: -5px;
-    left: 78px;
+    left: 77px;
     background-color: white;
 }
 
 .even-sec-sub:after {
     content: " ";
     position: absolute;
-    width: 78px;
+    width: 77px;
     height: 5px;
     z-index: 1;
     top: -5px;
@@ -287,14 +293,15 @@ nav {
     justify-content: space-around;
     align-items: center;
     margin-left: auto;
-    margin-right: 10px;
+    margin-right: -8px;
 }
 
 .nav-links>li:last-of-type ul.sub-menu {
-    right: 27px;
+    right: -6px;
 }
 
-.nav-links li a {
+.nav-links li a,
+.nav-links>li {
     color: white;
     text-decoration: none;
     text-transform: uppercase;
@@ -304,8 +311,12 @@ nav {
     }
 }
 
-// @media screen and (min-width: 768px)and (max-width: 1023px) {
-// }
+@media screen and (min-width: 768px)and (max-width: 800px) {
+    #loging {
+        margin-left: 0;
+    }
+}
+
 @media screen and (max-width: 767px) {
     nav {
         height: 8vh;
@@ -340,7 +351,7 @@ nav {
             left: 0;
             position: absolute;
             background: rgb(18, 31, 45);
-            height: 23vh;
+            height: 24vh;
             width: 100%;
             min-height: 102px;
             flex-direction: row;
@@ -350,7 +361,7 @@ nav {
             pointer-events: none;
             .sub-menu {
                 margin-top: 8px;
-                margin-left: 2px;
+                margin-left: -6px;
                 li {
                     a {
                         padding: 2px 5px;
@@ -399,6 +410,7 @@ nav {
             margin-left: 63px;
         }
         #loging {
+            margin-left: 30px;
             position: relative;
         }
         .even-sec-sub a:before {
