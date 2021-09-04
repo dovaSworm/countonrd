@@ -5,8 +5,17 @@
     </div>
     <?php echo form_open('invoices/create'); ?>
     <div class="row no-gutters p-3">
+        <div class="col-sm-12 col-md-4 col-lg-4 p-2">
+            <label>Datum</label>
+            <?php if (form_error('date')) {
+        echo '<div class="alert alert-warning">' . form_error('date') . '</div>';
+    }
+    ?>
+            <input type="text" id="date" name="date" class="form-control" value="<?php echo set_value('date', ''); ?>"
+                placeholder="Izdavanja fakture">
+        </div>
         <div class="col-sm-12 col-md-2 col-lg-2 p-2 d-flex align-items-center">
-            <label>Profaktura</label>
+            <label>Predračun</label>
             <?php if (form_error('profaktura')) {
         echo '<div class="alert alert-warning">' . form_error('profaktura') . '</div>';
     }
@@ -21,14 +30,13 @@
     ?>
             <input type="checkbox" name="avans" class="form-control" value="accept">
         </div>
-        <div class="col-sm-12 col-md-4 col-lg-4 p-2">
-            <label>Datum</label>
-            <?php if (form_error('date')) {
-        echo '<div class="alert alert-warning">' . form_error('date') . '</div>';
+        <div class="col-sm-12 col-md-2 col-lg-2 p-2 d-flex align-items-center">
+            <label>Konačni račun</label>
+            <?php if (form_error('konacni')) {
+        echo '<div class="alert alert-warning">' . form_error('konacni') . '</div>';
     }
     ?>
-            <input type="text" id="date" name="date" class="form-control" value="<?php echo set_value('date', ''); ?>"
-                placeholder="Izdavanja fakture">
+            <input type="checkbox" name="konacni" class="form-control" value="accept">
         </div>
         <div class="col-sm-12 col-md-4 col-lg-4 p-2">
             <label>Broj fakture</label>

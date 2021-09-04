@@ -116,7 +116,7 @@ thead{
 
     <div class="my-table">
         <div class="seller">
-            <img src="<?php echo base_url().'/assets/img/prologo.png'; ?>" alt="">
+            <img src="assets/img/prologo.png" alt="">
             <div class="info-company">
                 <div ><b><?php echo $invoice['sellername']; ?></b></div>
                 <div ><?php echo $invoice['selleradress']; ?></div>
@@ -126,14 +126,14 @@ thead{
             <div class="info-company">
                 <div >Banka: <?php echo $invoice['sellerbank']; ?></div>
                 <div >Račun: <?php echo $invoice['selleracc_num']; ?></div>
-                <div ><?php echo $invoice['sellerphone']; ?>sdasdasdasdas</div>
+                <div ><?php echo $invoice['sellerphone']; ?></div>
                 <div ><?php echo $invoice['selleremail']; ?></div>
             </div>
         </div>
-        <img src="<?php echo base_url().'/assets/img/prologobek.png'; ?>" alt="">
+        <img src="assets/img/prologobek.png" alt="">
         <div class="forbuyer">
             <div class="buyer w-50">
-                <b><?php echo $type; ?> za: </b>
+                <div>Klijent:</div>
                 <div><?php echo $invoice['buyername']; ?></div>
                 <div><?php echo $invoice['buyeradress']; ?></div>
                 <div><?php echo $invoice['buyerzip']; ?> <?php echo $invoice['buyercity']; ?></div>
@@ -141,7 +141,7 @@ thead{
                 <div>MB: <?php echo $invoice['buyermb']; ?></div>
             </div>
             <div class="invoice">
-                <div>Br fakture: <?php echo $invoice['inv_num']; ?></div>
+                <div><?php echo $type; ?> br: <?php echo $invoice['inv_num']; ?></div>
                 <?php $date = date_create($invoice['date']); $dateformat = date_format($date, "d.m.Y.");?>
                 <div>Datum: <?php echo $dateformat; ?></div>
                 <div>Ukupno za uplatu: <?php echo $invoice['total']; ?></div>

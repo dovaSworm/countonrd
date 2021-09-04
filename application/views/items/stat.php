@@ -9,14 +9,14 @@
                 <tbody>
                     <tr>
                         <th>Naziv</th>
-                        <th>Komada</th>
-                        <th>Vrednost</th>
+                        <th class="number">Komada</th>
+                        <th class="number">Vrednost</th>
                     </tr>
                     <?php foreach ($items_total_articles as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['quantity']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['quantity']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -28,14 +28,14 @@
                 <tbody>
                     <tr>
                         <th>Naziv</th>
-                        <th>Komada</th>
-                        <th>Vrednost</th>
+                        <th class="number">Komada</th>
+                        <th class="number">Vrednost</th>
                     </tr>
                     <?php foreach ($items_total_services as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['quantity']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['quantity']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -47,12 +47,12 @@
                 <tbody>
                     <tr>
                         <th>Najprodavaniji artikal</th>
-                        <th>komada</th>
+                        <th class="number">komada</th>
                     </tr>
                     <?php foreach ($best_q_this as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -60,12 +60,12 @@
                 <tbody>
                     <tr>
                         <th>Najslabije prodavan artikal</th>
-                        <th>komada</th>
+                        <th class="number">komada</th>
                     </tr>
                     <?php foreach ($worst_q_this as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -73,12 +73,12 @@
                 <tbody>
                     <tr>
                         <th>Najveći promet jednog artikla</th>
-                        <th>total</th>
+                        <th class="number">total</th>
                     </tr>
                     <?php foreach ($best_p_this as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -86,12 +86,12 @@
                 <tbody>
                     <tr>
                         <th>Najmanji promet artikla</th>
-                        <th>total</th>
+                        <th class="number">total</th>
                     </tr>
                     <?php foreach ($worst_p_this as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -103,12 +103,12 @@
                 <tbody>
                     <tr>
                         <th>Najprodavaniji artikal</th>
-                        <th>komada</th>
+                        <th class="number">komada</th>
                     </tr>
                     <?php foreach ($best_q_last as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -116,12 +116,12 @@
                 <tbody>
                     <tr>
                         <th>Najslabije prodavan artikal</th>
-                        <th>komada</th>
+                        <th class="number">komada</th>
                     </tr>
                     <?php foreach ($worst_q_last as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -129,12 +129,12 @@
                 <tbody>
                     <tr>
                         <th>Najveći promet jednog artikla</th>
-                        <th>total</th>
+                        <th class="number">total</th>
                     </tr>
                     <?php foreach ($best_p_last as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -142,12 +142,12 @@
                 <tbody>
                     <tr>
                         <th>Najmanji promet artikla</th>
-                        <th>total</th>
+                        <th class="number">total</th>
                     </tr>
                     <?php foreach ($worst_p_last as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -160,7 +160,7 @@
                     <?php foreach ($profaktura as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -173,7 +173,7 @@
                     <?php foreach ($avans as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['total']; ?></td>
+                        <td class="number"><?php echo $value['total']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -186,7 +186,7 @@
                     <?php foreach ($under_5 as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['name']; ?></td>
-                        <td><?php echo $value['quantity']; ?></td>
+                        <td class="number"><?php echo $value['quantity']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>

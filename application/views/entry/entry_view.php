@@ -106,7 +106,7 @@ function findItems() {
     <div class="d-flex flex-wrap">
         <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
             <label>Količina</label>
-            <input type="text" name="quantity" class="form-control" value="<?php echo set_value('quantity', ''); ?>">
+            <input type="text" name="quantity" class="form-control number" value="<?php echo set_value('quantity', ''); ?>">
         </div>
         <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
             <label>Valuta</label>
@@ -122,7 +122,7 @@ function findItems() {
                 echo '<div class="alert alert-warning">' . form_error('exch-rate') . '</div>';
             }
             ?>
-            <input type="text" name="exch-rate" class="form-control" value="<?php echo set_value('exch-rate', ''); ?>">
+            <input type="text" name="exch-rate" class="form-control number" value="<?php echo set_value('exch-rate', ''); ?>">
         </div>
         <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
             <label>Ulazna cena u devizama</label>
@@ -130,7 +130,7 @@ function findItems() {
                 echo '<div class="alert alert-warning">' . form_error('buying-for') . '</div>';
             }
             ?>
-            <input type="text" name="buying-for" class="form-control"
+            <input type="text" name="buying-for" class="form-control number"
                 value="<?php echo set_value('buying-for', ''); ?>">
         </div>
         <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
@@ -139,7 +139,7 @@ function findItems() {
                 echo '<div class="alert alert-warning">' . form_error('buying-home') . '</div>';
             }
             ?>
-            <input id="priceIn" type="text" name="buying-home" class="form-control"
+            <input id="priceIn" type="text" name="buying-home" class="form-control number"
                 value="<?php echo set_value('buying-home', ''); ?>">
         </div>
         <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
@@ -148,7 +148,7 @@ function findItems() {
                 echo '<div class="alert alert-warning">' . form_error('selling-home') . '</div>';
             }
             ?>
-            <input id="priceOut" type="text" name="selling-home" class="form-control"
+            <input id="priceOut" type="text" name="selling-home" class="form-control number"
                 value="<?php echo set_value('selling-home', ''); ?>">
         </div>
         <div class="col-sm-12 col-md-4 col-lg-3 mb-4">
@@ -157,7 +157,7 @@ function findItems() {
                 echo '<div class="alert alert-warning">' . form_error('selling-for') . '</div>';
             }
             ?>
-            <input type="text" name="selling-for" class="form-control"
+            <input type="text" name="selling-for" class="form-control number"
                 value="<?php echo set_value('selling-for', ''); ?>">
         </div>
     </div>
@@ -189,13 +189,13 @@ function findItems() {
                     <td><?php echo $value['sellers_code']; ?></td>
                     <td><?php echo $value['code']; ?></td>
                     <td><?php echo $value['name']; ?></td>
-                    <td><?php echo $value['buying_for']; ?></td>
+                    <td class="number"><?php echo $value['buying_for']; ?></td>
                     <td><?php echo $value['currency']; ?></td>
-                    <td><?php echo $value['exch_rate']; ?></td>
-                    <td><?php echo $value['buying_home']; ?></td>
-                    <td><?php echo $value['selling_home']; ?></td>
-                    <td><?php echo $value['selling_for']; ?></td>
-                    <td><?php echo $value['quantity']; ?></td>
+                    <td class="number"><?php echo $value['exch_rate']; ?></td>
+                    <td class="number"><?php echo $value['buying_home']; ?></td>
+                    <td class="number"><?php echo $value['selling_home']; ?></td>
+                    <td class="number"><?php echo $value['selling_for']; ?></td>
+                    <td class="number"><?php echo $value['quantity']; ?></td>
                     <?php echo form_open('entry/delete_item/' . $value['id'] . '/' . $entry['id']); ?><td>
                         <button title="Obriši" class="delete-item" type="submit"><i
                                 class="fas fa-trash-alt"></i></button></td><?php echo form_close(); ?>

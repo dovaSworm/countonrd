@@ -8,7 +8,6 @@ function findItems() {
     var itemName = document.getElementById('item-hint').value;
     var html =
         '<select name="item2" id="item2" class="form-control" onchange="showItem();" onfocus="this.selectedIndex = -1;">';
-    console.log(itemName);
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -41,13 +40,15 @@ function findItems() {
             <h4>Izrada i modifikacija fakture</h4>
         </div>
         <div class="m-auto pl-4">
-            <label>Vrsta dokumenta:</label>
+             <label>Vrsta dokumenta:</label>
             <?php if ($invoice['avans'] == 1): ?>
             <span class="text-uppercase">Avansni račun</span>
             <?php elseif ($invoice['profaktura'] == 1): ?>
-            <span class="text-uppercase">Profaktura</span>
+            <span class="text-uppercase">Predračun</span>
+            <?php elseif ($invoice['konacni'] == 1): ?>
+            <span class="text-uppercase">Konačni račun</span>
             <?php else: ?>
-            <span class="text-uppercase">Faktura</span>
+            <span class="text-uppercase">Račun</span>
             <?php endif;?>
         </div>
         <?php echo form_open('invoices/update/' . $invoice['id']); ?>
@@ -86,15 +87,15 @@ function findItems() {
                     name="discount" id="discount" size="10" value="<?php echo $invoice['discount']; ?>"></div>
             <div class="col-sm-12 col-md-4 col-lg-3 p-2"><label class="text-uppercase font-weight-bold">Za uplatu:
                 </label>
-                <div class="form-control"><?php echo $invoice['total']; ?></div>
+                <div class="form-control number"><?php echo $invoice['total']; ?></div>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-3 p-2"><label class="text-uppercase font-weight-bold">Plaćeno:</label>
-                <div class="form-control"><?php echo $invoice['payed']; ?></div>
+                <div class="form-control number"><?php echo $invoice['payed']; ?></div>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-3 p-2"><label class="text-uppercase font-weight-bold">Plati
-                    sad:</label><input class="form-control" type="text" name="payed" size="10" value=""></div>
+                    sad:</label><input class="form-control number" type="text" name="payed" size="10" value=""></div>
             <div class="col-sm-12 col-md-4 col-lg-3 p-2"><label class="text-uppercase font-weight-bold">Duguje:</label>
-                <div class="form-control"><?php echo $invoice['due']; ?></div>
+                <div class="form-control" number><?php echo $invoice['due']; ?></div>
             </div>
             <div class="col-sm-12 col-md-4 col-lg-3 p-2"><label>Slovima:</label><input class="form-control" type="text"
                     name="letters" value="<?php echo $invoice['letters']; ?>"></div>
@@ -145,10 +146,10 @@ function findItems() {
                     <th>Količina</th>
                     <th>Jed. mere</th>
                     <th>Popust(%)</th>
-                    <th>Ukupna cena</th>
+                    <th class="number">Ukupna cena</th>
                     <th>Poreska osnovica</th>
-                    <th>Iznos PDV-a</th>
-                    <th>Ukupan iznos</th>
+                    <th class="number">Iznos PDV-a</th>
+                    <th class="number">Ukupan iznos</th>
                 </tr>
             </thead>
             <?php if ($this->session->flashdata('invoiceitem_created')): ?>
@@ -160,23 +161,23 @@ function findItems() {
                 <tr>
                     <td> <?php echo $rb; ?></td>
                     <td><?php echo $value['name']; ?></td>
-                    <td><input type="text" name="price" class="price" size="7" value="<?php echo $value['price']; ?>">
+                    <td><input type="text" name="price" class="price number" size="7" value="<?php echo $value['price']; ?>">
                     </td>
-                    <td><input type="text" name="quantity" class="quantity" size="3"
+                    <td><input type="text" name="quantity" class="quantity  number" size="3"
                             value="<?php echo $value['quantity']; ?>"></td>
                     <td><?php echo $value['mes_unit']; ?></td>
-                    <td><input type="text" name="it-disc" class="it_disc" size="7"
+                    <td><input type="text" name="it-disc" class="it_disc number" size="7"
                             value="<?php echo $value['it_disc']; ?>"></td>
                     <?php
     $widhout_tax = $value['quantity'] * $value['price'] - ($value['quantity'] * $value['price'] * ($value['it_disc'] / 100));
     $tax_total = $widhout_tax * ($value['tax'] / 100);
     $with_tax = ($value['price'] + ($value['price'] * ($value['tax'] / 100))) * $value['quantity'];
     ?>
-                    <td><?php echo number_format($widhout_tax,2); ?></td>
-                    <td><input type="text" name="tax" class="tax" size="3" value="<?php echo $value['tax']; ?>">
+                    <td class="number"><?php echo number_format($widhout_tax,2); ?></td>
+                    <td><input type="text" name="tax" class="tax number" size="3" value="<?php echo $value['tax']; ?>">
                     </td>
-                    <td><?php echo number_format($tax_total,2); ?></td>
-                    <td><?php echo number_format($value['total'],2); ?></td>
+                    <td class="number"><?php echo number_format($tax_total,2); ?></td>
+                    <td class="number"><?php echo number_format($value['total'],2); ?></td>
                     <td><button title="Izmeni" class="edit-item" type="submit"><i
                                 class="fas fa-pen"></i></button><?php echo form_close(); ?><input type="hidden"
                             class="form-control" value="'<?php echo $value['id']; ?>'"></td>

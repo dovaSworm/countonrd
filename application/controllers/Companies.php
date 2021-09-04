@@ -109,7 +109,7 @@ class Companies extends CI_Controller
             if ($this->company_model->create($data)) {
 
                 $this->session->set_flashdata('company_created', 'Kompanija  uspesno dodana u bazu');
-                redirect('home');
+                redirect('companies/index');
             } else {
                 $this->db->display_errors();
             }

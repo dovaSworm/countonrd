@@ -67,9 +67,9 @@
             <input type="text" name="contact" class="form-control" placeholder="Ime i prezime"
                 value="<?php echo set_value('contact', ''); ?>">
         </div>
-        <?php echo form_close(); ?>
     </div>
     <div class="text-center">
         <button class="btn mybutton" type="submit">Unesi kompaniju</button>
     </div>
+        <?php echo form_close(); ?>
 </div>

@@ -1,6 +1,9 @@
 <section class="hom-sec">
     <div class="mytitle container">
         <h4 id="hom-welc">Dobrodošli, RD design predstavlja</h4>
+        <?php if ($this->session->flashdata('company_created')): ?>
+        <?php echo '<p class="alert alert-success">' . $this->session->flashdata('company_created') . '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'; ?>
+        <?php endif;?>
         <?php if ($this->session->flashdata('user_registered')): ?>
         <?php echo '<p class="alert alert-success">' . $this->session->flashdata('user_registered') . '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'; ?>
         <?php endif;?>

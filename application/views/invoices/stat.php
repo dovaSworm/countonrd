@@ -41,22 +41,25 @@
 
         <div class="col-sm-12 col-md-4 col-lg-4 p-2">
             <label>Valuta</label>
-            <select name="currency" id="currency" class="form-control">
-                <option value=""></option>
+            <select name="currency" id="currency" class="form-control" value="1">
                 <option value="RSD">RSD</option>
-                <option value="EU">EU</option>
+                <option value="EU">EUR</option>
                 <option value="USD">USD</option>
             </select>
         </div>
 
         <div style="justify-content:space-around" class="col-sm-12 col-md-4 col-lg-4 p-2 d-flex">
             <div class="d-flex align-items-center">
-                <label>Profaktura</label>
+                <label>Pred račun</label>
                 <input type="checkbox" name="profaktura" class="form-control" value="accept">
             </div>
             <div class="d-flex align-items-center">
                 <label class="mr-2">Avansni račun</label>
                 <input type="checkbox" name="avans" class="form-control" value="accept">
+            </div>
+            <div class="d-flex align-items-center">
+                <label class="mr-2">Konačni račun</label>
+                <input type="checkbox" name="konacni" class="form-control" value="accept">
             </div>
         </div>
 
@@ -92,7 +95,7 @@
                 <?php foreach ($total as $key => $value): ?>
                 <tr>
                     <td><?php echo $value['currency']; ?></td>
-                    <td><?php echo $value['total']; ?></td>
+                    <td class="number"><?php echo $value['total']; ?></td>
                 <tr>
                     <?php endforeach;?>
                     </tbody>
@@ -103,7 +106,7 @@
                         <?php foreach ($total as $key => $value): ?>
                         <tr>
                             <td><?php echo $value['currency']; ?></td>
-                            <td><?php echo $value['due']; ?></td>
+                            <td class="number"><?php echo $value['due']; ?></td>
                         <tr>
                             <?php endforeach;?>
                     </tbody>
@@ -115,14 +118,14 @@
             <table class="table m-auto">
                 <tr>
                     <th>Broj fakture</th>
-                    <th>Vrednost</th>
-                    <th>Neplaćeno</th>
+                    <th class="number">Vrednost</th>
+                    <th class="number">Neplaćeno</th>
                 </tr>
                 <?php foreach ($invoices as $key => $value): ?>
                 <tr>
-                    <td><a href="<?php echo base_url() . 'invoices/view/' . $value['inv_num']; ?>"><?php echo $value['inv_num']; ?></a></td>
-                    <td><?php echo $value['total']; ?> <?php echo $value['currency']; ?></td>
-                    <td><?php echo $value['due']; ?></td>
+                    <td><a href="<?php echo base_url() . 'invoices/view/' . $value['id']; ?>"><?php echo $value['inv_num']; ?></a></td>
+                    <td class="number"><?php echo $value['total']; ?> <?php echo $value['currency']; ?></td>
+                    <td class="number"><?php echo $value['due']; ?></td>
                 <tr>
                     <?php endforeach;?>
                 </tbody>
@@ -138,34 +141,34 @@
                 <caption>Prihodi</caption>
                 <tbody>
                     <tr>
-                        <th colspan="2">Total</th>
+                        <th>Valuta</th><th class="number">Total</th>
                     </tr>
                     <?php foreach ($income_total as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['currency']; ?></td>
-                        <td><?php echo $value['total_in']; ?></td>
+                        <td class="number"><?php echo $value['total_in']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
                 <tbody>
                     <tr>
-                        <th colspan="2">Ovaj mesec</th>
+                        <th colspan="2" style="text-align: center;">Ovaj mesec</th>
                     </tr>
                     <?php foreach ($this_in as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['currency']; ?></td>
-                        <td><?php echo $value['total_in']; ?></td>
+                        <td class="number"><?php echo $value['total_in']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
                 <tbody>
                     <tr>
-                        <th colspan="2">Prošli mesec</th>
+                        <th colspan="2" style="text-align: center;">Prošli mesec</th>
                     </tr>
                     <?php foreach ($last_in as $key => $value): ?>
                     <tr>
                         <td><?php echo $value['currency']; ?></td>
-                        <td><?php echo $value['total_in']; ?></td>
+                        <td class="number"><?php echo $value['total_in']; ?></td>
                     <tr>
                         <?php endforeach;?>
                 </tbody>
@@ -175,34 +178,34 @@
             <table class="table">
                 <caption>Rashodi</caption>
                 <tr>
-                    <th colspan="2">Total</th>
+                <th>Valuta</th><th class="number">Total</th>
                 </tr>
                 <?php foreach ($outcome_total as $key => $value): ?>
                 <tr>
                     <td><?php echo $value['currency']; ?></td>
-                    <td><?php echo $value['total_out']; ?></td>
+                    <td class="number"><?php echo $value['total_out']; ?></td>
                 <tr>
                     <?php endforeach;?>
                     </tbody>
                     <tbody>
                         <tr>
-                            <th colspan="2">Ovaj mesec</th>
+                            <th colspan="2" style="text-align: center;">Ovaj mesec</th>
                         </tr>
                         <?php foreach ($this_out as $key => $value): ?>
                         <tr>
                             <td><?php echo $value['currency']; ?></td>
-                            <td><?php echo $value['total_out']; ?></td>
+                            <td class="number"><?php echo $value['total_out']; ?></td>
                         <tr>
                             <?php endforeach;?>
                     </tbody>
                     <tbody>
                         <tr>
-                            <th colspan="2">Prošli mesec</th>
+                            <th colspan="2" style="text-align: center;">Prošli mesec</th>
                         </tr>
                         <?php foreach ($last_out as $key => $value): ?>
                         <tr>
                             <td><?php echo $value['currency']; ?></td>
-                            <td><?php echo $value['total_out']; ?></td>
+                            <td class="number"><?php echo $value['total_out']; ?></td>
                         <tr>
                             <?php endforeach;?>
                     </tbody>

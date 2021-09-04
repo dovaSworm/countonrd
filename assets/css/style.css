@@ -47,7 +47,9 @@ a:hover {
     text-decoration: none;
     color: inherit;
 }
-
+.number {
+    text-align: right;
+}
 .myshadow {
     box-shadow: 3px 1px 16px 0px rgba(220, 220, 220, .8);
 }
@@ -116,6 +118,18 @@ div>input,
 div.form-control,
 div>select {
     border-radius: 18px!important;
+}
+
+input:focus,
+textarea:focus {
+    /* border: none; */
+    background: #f0f8ff;
+    outline: 2px solid transparent;
+    outline-offset: 1px;
+}
+
+#hint-inp {
+    padding: 0 10px;
 }
 
 input[autofocus] {

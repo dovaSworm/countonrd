@@ -36,8 +36,8 @@ function showHint(str) {
                     <th>Vrsta</th>
                     <th>Jedinica mere</th>
                     <th>Količina</th>
-                    <th>Ulazna cena</th>
-                    <th>Prodajna cena</th>
+                    <th class="number">Ulazna cena</th>
+                    <th class="number">Prodajna cena</th>
                     <th>Šifra Dobavljača</th>
                     <th colspan="3" class="text-center">Akcije</th>
                 </tr>
@@ -56,9 +56,9 @@ function showHint(str) {
                     <td><?php echo $value['code'] ?></td>
                     <td><?php echo  $group ?></td>
                     <td><?php echo $value['mes_unit'] ?></td>
-                    <td><?php echo $value['quantity'] ?></td>
-                    <td><?php echo $value['buying_price'] ?></td>
-                    <td><?php echo $value['selling_price'] ?></td>
+                    <td class="number"><?php echo $value['quantity'] ?></td>
+                    <td class="number"><?php echo $value['buying_price'] ?></td>
+                    <td class="number"><?php echo $value['selling_price'] ?></td>
                     <td><?php echo $value['sellers_code'] ?></td>
                     <td><input type="hidden" name="zabrisanje" value="<?php echo $value['id']; ?>"></td>
                     <td><button class="edit-item" type="submit" title="Izmeni"><a
