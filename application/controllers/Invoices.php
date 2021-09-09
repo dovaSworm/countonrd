@@ -112,6 +112,7 @@ class Invoices extends CI_Controller
                 'profaktura' => !empty($this->input->post('profaktura')) ? 1 : 0,
                 'avans' => !empty($this->input->post('avans')) ? 1 : 0,
                 'konacni' => !empty($this->input->post('konacni')) ? 1 : 0,
+                'gotovinski' => !empty($this->input->post('gotovinski')) ? 1 : 0,
                 'notes' => $this->input->post('notes'),
             );
             if ($created = $this->invoice_model->create($data)) {
@@ -279,15 +280,16 @@ class Invoices extends CI_Controller
             '<td>' . number_format($data['inv_total_with_tax'], 2) . '</td></tr>';
         $data['html_total'] = $html_total;
         $type = '';
-         if($data['invoice']['avans'] == 1){
+        if($data['invoice']['avans'] == 1){
             $type = 'Avansni račun';
         }elseif($data['invoice']['profaktura'] == 1){
-            $type = "Račun";
-        }
-        elseif($data['invoice']['konacni'] == 1){
-            $type = "Konačni račun";
-        }else{
             $type = "Predračun";
+        }elseif($data['invoice']['konacni'] == 1){
+            $type = "Konačni račun";
+        }elseif($data['invoice']['gotovinski'] == 1){
+            $type = "Gotovinski račun";
+        }else{
+            $type = "Račun";
         }
         $data['type'] = $type;
         // $data['invoice'] = $this->invoice_model->get_invoice_and_companies($id);
@@ -345,14 +347,15 @@ class Invoices extends CI_Controller
         }
         $prof = !empty($this->input->post('profaktura')) ? 1 : 0;
         $avans = !empty($this->input->post('avans')) ? 1 : 0;
-        $konacni =  !empty($this->input->post('konacni')) ? 1 : 0;  
+        $konacni =  !empty($this->input->post('konacni')) ? 1 : 0;
+        $gotovinski =  !empty($this->input->post('gotovinski')) ? 1 : 0;
         $company = $this->input->post('company');
         $data = $this->invoice_stat_monthly();
         $data['company'] = $this->company_model->get_one($this->input->post('company'));
         $data['bors'] = $bors;
         $data['companies'] = $this->company_model->get_companies();
-        $data['invoices'] = $this->invoice_model->get_inv_num_for_company($company, $bors, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof, $konacni);
-        $data['total'] = $this->invoice_model->get_total_and_due($company, $bors, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof, $konacni);
+        $data['invoices'] = $this->invoice_model->get_inv_num_for_company($company, $bors, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof, $konacni, $gotovinski);
+        $data['total'] = $this->invoice_model->get_total_and_due($company, $bors, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof, $konacni, $gotovinski);
         $this->load->view('templates/header');
         $this->load->view('invoices/stat', $data);
         $this->load->view('templates/footer');

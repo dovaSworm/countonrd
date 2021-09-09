@@ -179,6 +179,16 @@ class Items extends CI_Controller
 
             echo $html;
         }
+        if (isset($_REQUEST["hint"])) {
+            $hint = $_REQUEST["hint"];
+            $items = $this->item_model->get_items_hint($hint);
+            $html ='<select name="item" id="item" class="form-control">';
+            foreach ($items as $item) {
+                $html .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+            }
+            $html .='</select>';
+            echo $html;
+        }
 
     }
 
@@ -188,13 +198,6 @@ class Items extends CI_Controller
         echo json_encode($item);
     }
 
-    public function get_items_by_hint()
-    {
-        $name = $_REQUEST["hint"];
-        $items = $this->item_model->get_items_hint($name);
-        echo json_encode($items);
-
-    }
     public function get_items_by_code()
     {
         $code = $_REQUEST["hint"];

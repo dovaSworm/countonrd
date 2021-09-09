@@ -44,7 +44,6 @@ $(document).ready(function() {
     //     });
     // });
     if (window.innerWidth % 2 == 0) {
-        console.log("parno");
         $("ul.sub-menu.last-sub").addClass("even-sub");
         $("ul.sub-menu.last-sub").removeClass("last-sub");
         $("ul.sub-menu.sec-sub").addClass("even-sec-sub");

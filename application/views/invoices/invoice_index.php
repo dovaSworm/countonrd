@@ -31,6 +31,8 @@
                         echo "Avansni račun";
                     }elseif($value['konacni'] == 1){
                         echo "Konačni račun";
+                    }elseif($value['gotovinski'] == 1){
+                        echo "Gotovinski račun";
                     }else{
                         echo "Račun";
                     }; ?></td>

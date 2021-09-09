@@ -38,6 +38,14 @@
     ?>
             <input type="checkbox" name="konacni" class="form-control" value="accept">
         </div>
+        <div class="col-sm-12 col-md-2 col-lg-2 p-2 d-flex align-items-center">
+            <label>Gotovinski račun</label>
+            <?php if (form_error('gotovinski')) {
+        echo '<div class="alert alert-warning">' . form_error('gotovinski') . '</div>';
+    }
+    ?>
+            <input type="checkbox" name="gotovinski" class="form-control" value="accept">
+        </div>
         <div class="col-sm-12 col-md-4 col-lg-4 p-2">
             <label>Broj fakture</label>
             <?php if (form_error('inv-num')) {

@@ -46,7 +46,6 @@
             if(($item['group_id'] == 1) && !($invoice['profaktura'] == 0 && $invoice['avans'] == 0)){
                 $this->item_model->change_quantity(($item['quantity']-$quantity),$item_id);
             }
-            $this->session->set_flashdata('invoiceitem_created', 'invoiceitem uspesno dodana u bazu');
             redirect('invoices/view/' . $inv_id);
         }
         

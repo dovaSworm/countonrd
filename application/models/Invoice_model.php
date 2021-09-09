@@ -17,7 +17,7 @@ class Invoice_model extends CI_Model
             $query = $this->db->get('invoice_items');
             return $query->result_array();
         } else {
-            $sql = "SELECT invoices.date, invoices.avans,invoices.konacni, invoices.due, invoices.payed, invoices.profaktura, invoices.letters, invoices.id, invoices.total,
+            $sql = "SELECT invoices.date, invoices.avans, invoices.gotovinski, invoices.konacni, invoices.due, invoices.payed, invoices.profaktura, invoices.letters, invoices.id, invoices.total,
             invoices.inv_num, invoices.currency, invoices.notes, invoices.pay_deadline, invoices.discount, c.name as buyername, c.mb as buyermb, c.pib as buyerpib, c.adress as buyeradress, c.city as buyercity, c.zip_code as buyerzip,
              c2.name as sellername, c2.pib sellerpib, c2.mb sellermb, c2.phone sellerphone, c2.account_num selleracc_num, c2.bank sellerbank, c2.email selleremail, c2.adress as selleradress, c2.city sellercity, c2.account_num selleraccount, c2.zip_code as sellerzip FROM invoices INNER JOIN companies c ON c.id = invoices.buyer INNER JOIN companies c2 ON c2.id = invoices.seller where invoices.id = ?";
             $query = $this->db->query($sql, $id);
@@ -67,7 +67,7 @@ class Invoice_model extends CI_Model
         return $query->result_array();
     }
 
-    public function get_total_and_due($company, $prokup, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof, $konacni)
+    public function get_total_and_due($company, $prokup, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof, $konacni, $gotovinski)
     {
         $this->db->query("SET sql_mode = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
         // $query = $this->db->get_where('invoices', array('buyer' => $company));
@@ -95,13 +95,13 @@ class Invoice_model extends CI_Model
         if ($prof > 0) {
             $sql .= " AND profaktura ='{$prof}'";
         }
-        // if ($konacni > 0) {
-        //     $sql .= "AND konacni ='{$konacni}'";
-        // }
+        if ($gotovinski > 0) {
+            $sql .= "AND gotovinski ='{$gotovinski}'";
+        }
         $query = $this->db->query($sql, $company);
         return $query->result_array();
     }
-    public function get_inv_num_for_company($company, $bors, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof, $konacni)
+    public function get_inv_num_for_company($company, $bors, $date_from, $date_to, $pay_deadline, $currency, $avans, $prof, $konacni, $gotovinski)
     {
         $this->db->query("SET sql_mode = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
         $sql = "SELECT id, inv_num, total, due, currency
@@ -128,9 +128,9 @@ class Invoice_model extends CI_Model
         if ($prof > 0) {
             $sql .= "AND profaktura ='{$prof}'";
         }
-        // if ($konacni > 0) {
-        //     $sql .= "AND konacni ='{$konacni}'";
-        // }
+        if ($gotovinski > 0) {
+            $sql .= "AND gotovinski ='{$gotovinski}'";
+        }
         $query = $this->db->query($sql, $company);
         return $query->result_array();
     }

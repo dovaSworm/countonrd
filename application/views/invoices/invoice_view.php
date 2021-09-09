@@ -4,30 +4,19 @@ if (!is_numeric($user)) {
 }
 ?>
 <script>
-function findItems() {
-    var itemName = document.getElementById('item-hint').value;
-    var html =
-        '<select name="item2" id="item2" class="form-control" onchange="showItem();" onfocus="this.selectedIndex = -1;">';
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var hintItems = JSON.parse(this.responseText);
-            // document.getElementById('hints').html = JSON.parse(this.responseText);
-            document.getElementById('item').parentElement.style.display = "none";
-            document.getElementById('item').parentElement.classList.remove("d-flex");
-            document.getElementById('hints').style.display = "flex";
-            // console.log(JSON.parse(this.responseText)[0]['id']);
-            for (var i = 0; i < hintItems.length; i++) {
-                console.log(hintItems[0].id);
-                html += '<option value="' + hintItems[i].id + '">' + hintItems[i].name + '</option>';
+function showHint(str) {
+    if (str.length == 0) {
+    } else {
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+                document.getElementById("txtHint").innerHTML = "";
+                document.getElementById("txtHint").innerHTML = this.responseText;
             }
-            html += '</select>';
-            document.getElementById('hints').innerHTML = html;
-
         }
+        xmlhttp.open("GET", "<?php echo base_url(); ?>items/get_items_like?hint=" + str, true);
+        xmlhttp.send();
     }
-    xmlhttp.open("GET", "<?php echo base_url(); ?>items/get_items_by_hint?hint=" + itemName, true);
-    xmlhttp.send();
 }
 </script>
 <?php if ($this->session->flashdata('invoice_created')): ?>
@@ -47,6 +36,8 @@ function findItems() {
             <span class="text-uppercase">Predračun</span>
             <?php elseif ($invoice['konacni'] == 1): ?>
             <span class="text-uppercase">Konačni račun</span>
+            <?php elseif ($invoice['gotovinski'] == 1): ?>
+            <span class="text-uppercase">Gotovinski račun</span>
             <?php else: ?>
             <span class="text-uppercase">Račun</span>
             <?php endif;?>
@@ -58,8 +49,8 @@ function findItems() {
                 <label>Prodavac</label>
                 <select name="seller" id="seller" class="form-control">
                     <?php foreach ($companies as $key => $value): ?>
-                    <option value="<?= $value['id'] ?>" <?= $value['name']==$invoice['sellername']? "selected":""?>>
-                        <?= $value['name'] ?> </option>
+                    <option value="<?=$value['id']?>" <?=$value['name'] == $invoice['sellername'] ? "selected" : ""?>>
+                        <?=$value['name']?> </option>
                     <?php endforeach;?>
                 </select>
             </div>
@@ -67,8 +58,8 @@ function findItems() {
                 <label>Kupac</label>
                 <select name="buyer" id="buyer" class="form-control">
                     <?php foreach ($companies as $key => $value): ?>
-                    <option value="<?= $value['id'] ?>" <?= $value['name']==$invoice['buyername']? "selected":""?>>
-                        <?= $value['name'] ?> </option>
+                    <option value="<?=$value['id']?>" <?=$value['name'] == $invoice['buyername'] ? "selected" : ""?>>
+                        <?=$value['name']?> </option>
                     <?php endforeach;?>
                 </select>
             </div>
@@ -111,21 +102,23 @@ function findItems() {
             <div class="row align-items-center no-gutters">
                 <div class="input-wrapper col-sm-12 col-md-6 text-center my-3">
                     <label>Nađi artikal</label>
-                    <input type="text" class="form-control" id="item-hint" name="item-hint" oninput="findItems();">
+                    <input type="text" class="form-control" id="item-hint" name="item-hint" onkeyup="showHint(this.value);">
                 </div>
                 <div class="input-wrapper col-sm-12 text-center col-md-6 " id="hints">
                 </div>
                 <div class="input-wrapper text-center col-sm-12 col-md-6">
                     <label>Dodaj artikal</label>
                     <?php if (form_error('item')) {
-        echo '<div class="alert alert-warning">' . form_error('item') . '</div>';
-    }?>
+    echo '<div class="alert alert-warning">' . form_error('item') . '</div>';
+}?>
                     <div class="d-flex">
-                        <select name="item" id="item" class="form-control">
-                            <?php foreach ($items as $key => $value): ?>
-                            <option value="<?php echo $item = $value['id']; ?>"><?php echo $value['name']; ?></option>
-                            <?php endforeach;?>
-                        </select>
+                        <div id="txtHint">
+                            <select name="item" id="item" class="form-control">
+                                <?php foreach ($items as $key => $value): ?>
+                                <option value="<?php echo $item = $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                <?php endforeach;?>
+                            </select>
+                        </div>
                         <button title="Add article" id="add-item-btn"
                             class="ml-2 btn bnt-primary text-primary text-uppercase" type="submit"><i
                                 class="fas fa-plus"></i></button>
@@ -152,41 +145,39 @@ function findItems() {
                     <th class="number">Ukupan iznos</th>
                 </tr>
             </thead>
-            <?php if ($this->session->flashdata('invoiceitem_created')): ?>
-            <?php echo '<p class="alert alert-success">' . $this->session->flashdata('invoiceitem_created') . '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'; ?>
-            <?php endif;?>
+
             <tbody>
                 <?php $rb = 1;foreach ($invoice_items as $key => $value): ;?>
-                <?php echo form_open('invoice_items/update/' . $value['id']); ?>
-                <tr>
-                    <td> <?php echo $rb; ?></td>
-                    <td><?php echo $value['name']; ?></td>
-                    <td><input type="text" name="price" class="price number" size="7" value="<?php echo $value['price']; ?>">
-                    </td>
-                    <td><input type="text" name="quantity" class="quantity  number" size="3"
-                            value="<?php echo $value['quantity']; ?>"></td>
-                    <td><?php echo $value['mes_unit']; ?></td>
-                    <td><input type="text" name="it-disc" class="it_disc number" size="7"
-                            value="<?php echo $value['it_disc']; ?>"></td>
-                    <?php
+	                <?php echo form_open('invoice_items/update/' . $value['id']); ?>
+	                <tr>
+	                    <td> <?php echo $rb; ?></td>
+	                    <td><?php echo $value['name']; ?></td>
+	                    <td><input type="text" name="price" class="price number" size="7" value="<?php echo $value['price']; ?>">
+	                    </td>
+	                    <td><input type="text" name="quantity" class="quantity  number" size="3"
+	                            value="<?php echo $value['quantity']; ?>"></td>
+	                    <td><?php echo $value['mes_unit']; ?></td>
+	                    <td><input type="text" name="it-disc" class="it_disc number" size="7"
+	                            value="<?php echo $value['it_disc']; ?>"></td>
+	                    <?php
     $widhout_tax = $value['quantity'] * $value['price'] - ($value['quantity'] * $value['price'] * ($value['it_disc'] / 100));
     $tax_total = $widhout_tax * ($value['tax'] / 100);
     $with_tax = ($value['price'] + ($value['price'] * ($value['tax'] / 100))) * $value['quantity'];
     ?>
-                    <td class="number"><?php echo number_format($widhout_tax,2); ?></td>
-                    <td><input type="text" name="tax" class="tax number" size="3" value="<?php echo $value['tax']; ?>">
-                    </td>
-                    <td class="number"><?php echo number_format($tax_total,2); ?></td>
-                    <td class="number"><?php echo number_format($value['total'],2); ?></td>
-                    <td><button title="Izmeni" class="edit-item" type="submit"><i
-                                class="fas fa-pen"></i></button><?php echo form_close(); ?><input type="hidden"
-                            class="form-control" value="'<?php echo $value['id']; ?>'"></td>
-                    <?php echo form_open('invoice_items/delete/' . $value['id'] . '/' . $invoice['id']); ?><td>
-                        <button title="Obriši" class="delete-item" type="submit"><i
-                                class="fas fa-trash-alt"></i></button></td><?php echo form_close(); ?>
-                </tr>
+	                    <td class="number"><?php echo number_format($widhout_tax, 2); ?></td>
+	                    <td><input type="text" name="tax" class="tax number" size="3" value="<?php echo $value['tax']; ?>">
+	                    </td>
+	                    <td class="number"><?php echo number_format($tax_total, 2); ?></td>
+	                    <td class="number"><?php echo number_format($value['total'], 2); ?></td>
+	                    <td><button title="Izmeni" class="edit-item" type="submit"><i
+	                                class="fas fa-pen"></i></button><?php echo form_close(); ?><input type="hidden"
+	                            class="form-control" value="'<?php echo $value['id']; ?>'"></td>
+	                    <?php echo form_open('invoice_items/delete/' . $value['id'] . '/' . $invoice['id']); ?><td>
+	                        <button title="Obriši" class="delete-item" type="submit"><i
+	                                class="fas fa-trash-alt"></i></button></td><?php echo form_close(); ?>
+	                </tr>
 
-                <?php $rb++;endforeach;?>
+	                <?php $rb++;endforeach;?>
 
                 <tr class="font-weight-bold"><strong><?php echo $html_total; ?></strong></tr>
             </tbody>
