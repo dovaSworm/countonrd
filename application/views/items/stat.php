@@ -1,5 +1,5 @@
 <div class="create-header">
-    <h4>Statistika artikli</h4>
+    <h2>Statistika artikli</h2>
 </div>
 <div class="container cont-stat">
     <div class="row no-gutters">

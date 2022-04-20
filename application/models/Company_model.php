@@ -17,9 +17,11 @@ class Company_model extends CI_Model
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
         return $this->db->insert('companies', $data);
     }
-
-    public function get_companies()
+    public function get_companies($limit = FALSE, $offset = FALSE)
     {
+        if($limit){
+            $this->db->limit($limit, $offset);
+        }
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
         $this->db->order_by('id');
         $query = $this->db->get('companies');
@@ -64,14 +66,14 @@ class Company_model extends CI_Model
     {
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
         if(!$month==false){
-        $sql = "SELECT SUM(total) as total_in, buyer, SUM(due) as due, COUNT(inv_num) as inv_num
-        FROM invoices
+        $sql = "SELECT SUM(total) as total_in, c.name as buyer, SUM(due) as due, COUNT(inv_num) as inv_num
+        FROM invoices i LEFT JOIN companies c ON i.buyer = c.id
         where seller='16' AND MONTH(date) = '{$month}' GROUP BY buyer";
             $query = $this->db->query($sql);
             return $query->result_array();
         }
-        $sql = "SELECT SUM(total) as total_in, buyer, SUM(due) as due, COUNT(inv_num) as inv_num
-            FROM invoices
+        $sql = "SELECT SUM(total) as total_in, c.name as buyer, SUM(due) as due, COUNT(inv_num) as inv_num
+        FROM invoices i LEFT JOIN companies c ON i.buyer = c.id
             where seller='16' GROUP BY buyer";
             $query = $this->db->query($sql);
             return $query->result_array();
@@ -80,14 +82,14 @@ class Company_model extends CI_Model
     {
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
         if(!$month==false){
-        $sql = "SELECT SUM(total) as total_out, seller, SUM(due) as due, COUNT(inv_num) as inv_num
-        FROM invoices as i
+        $sql = "SELECT SUM(total) as total_out, c.name as seller, SUM(due) as due, COUNT(inv_num) as inv_num
+        FROM invoices i LEFT JOIN companies c ON i.buyer = c.id
         where buyer='16' AND MONTH(date) = '{$month}' GROUP BY seller";
             $query = $this->db->query($sql);
             return $query->result_array();
         }
-        $sql = "SELECT SUM(total) as total_out, seller, SUM(due) as due, COUNT(inv_num) as inv_num
-            FROM invoices as i
+        $sql = "SELECT SUM(total) as total_out, c.name as seller, SUM(due) as due, COUNT(inv_num) as inv_num
+            FROM invoices i LEFT JOIN companies c ON i.seller = c.id
             where buyer='16' GROUP BY seller";
             $query = $this->db->query($sql);
             return $query->result_array();

@@ -24,7 +24,7 @@ function showHint(str) {
 <?php endif;?>
 <!-- <img src="https://github.com/dovaSworm/front-end/blob/master/Pipboy/img/angry.jpg?raw=true" alt=""> -->
 
-    <div class="container create-wrapper myshadow">
+    <div class="container entry myshadow">
         <div class="create-header">
             <h4>Izrada i modifikacija fakture</h4>
         </div>
@@ -115,7 +115,7 @@ function showHint(str) {
                         <div id="txtHint">
                             <select name="item" id="item" class="form-control">
                                 <?php foreach ($items as $key => $value): ?>
-                                <option value="<?php echo $item = $value['id']; ?>"><?php echo $value['name']; ?></option>
+                                <option value="<?php echo $item = $value['id']; ?>"><?php echo $value['code']; ?></option>
                                 <?php endforeach;?>
                             </select>
                         </div>

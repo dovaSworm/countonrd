@@ -6,7 +6,10 @@
                 show_404();
                 // echo 'rado';
             }
-
+            $user = $this->session->userdata('user_id');
+            if (!is_numeric($user)) {
+                redirect('users/login');
+            }
             $data['title'] = ucfirst($page);
             
             $this->load->view('templates/header');

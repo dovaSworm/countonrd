@@ -20,12 +20,16 @@ class Invoices extends CI_Controller
 
     public function view_all($offset = 0)
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $this->load->library('pagination');
 
         $config['base_url'] = base_url() . 'invoices/view_all';
         $this->db->query("SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' ");
         $config['total_rows'] = $this->db->count_all('invoices');
-        $config['per_page'] = 11;
+        $config['per_page'] = 10;
         $config['uri_segment'] = 3;
         $config['num_links'] = 2;
         $config['first_link'] = "Prva";
@@ -316,6 +320,10 @@ class Invoices extends CI_Controller
 
     public function get_stat()
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $date_from ="";
         $date_to = "";
         $currency = "";

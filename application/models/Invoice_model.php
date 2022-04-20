@@ -63,6 +63,7 @@ class Invoice_model extends CI_Model
         $this->db->select('invoices.*, c.name AS buyername, cc.name AS sellername');
         $this->db->join('companies c', 'invoices.buyer = c.id','left');
         $this->db->join('companies cc', 'invoices.seller = cc.id','left');
+        $this->db->order_by('id',"desc");
         $query = $this->db->get('invoices');
         return $query->result_array();
     }

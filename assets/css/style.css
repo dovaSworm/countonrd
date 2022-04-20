@@ -51,7 +51,7 @@ a:hover {
     text-align: right;
 }
 .myshadow {
-    box-shadow: 3px 1px 16px 0px rgba(220, 220, 220, .8);
+    box-shadow: 4px 4px 20px -3px  rgba(0, 0, 0, .15);
 }
 
 .btn-sec {
@@ -113,12 +113,12 @@ a:hover {
     border: 1px solid #ced4da;
 }
 
-div>input,
+/* div>input,
 .search input,
 div.form-control,
 div>select {
     border-radius: 18px!important;
-}
+} */
 
 input:focus,
 textarea:focus {
@@ -213,19 +213,16 @@ button.delete-item {
     border: none;
 }
 
-button.edit-item a:hover,
-button.edit-item:hover {
+button.edit-item a:hover{
     color: deepskyblue;
 }
 
-button.delete-item a:hover,
-button.delete-item:hover {
+button.delete-item a:not([href]):hover{
     color: red;
 }
 
-button.view-item:hover,
 button.view-item a:hover {
-    color: rgb(52, 78, 102);
+    color: rgb(102, 132, 160);
 }
 
 .article th:first-of-type {
@@ -261,8 +258,8 @@ button.view-item a:hover {
     text-transform: uppercase;
     padding: 0 15px 6px 15px;
     border-bottom: 3px solid #71477a;
-    margin-top: 10vh;
-    margin-bottom: 60px;
+    margin-top: 80px;
+    margin-bottom: 20px;
 }
 
 .input-wrapper {
@@ -278,15 +275,14 @@ button.view-item a:hover {
 }
 
 .entry {
-    margin-top: 10vh;
+    margin-top: 6vh;
     background: aliceblue;
     padding: 20px 0;
 }
 
-.entry #entry-data {
-    /* background: aliceblue; */
+/* .entry #entry-data {
     border-bottom: 1px dotted gray;
-}
+} */
 
 #item-hint {
     border-radius: 3px;
@@ -354,6 +350,10 @@ div.pagination-links li a {
 .foo-logo p:last-child {
     margin-top: -4px;
     margin-bottom: 2px
+}
+
+.home-menu {
+    display: flex;
 }
 
 .hom-sec {
@@ -440,15 +440,9 @@ div.pagination-links li a {
 .cont-stat {
     background: #f8f9fa;
     padding: 0 5px 10px 5px;
-    margin-top: 60px;
     margin-bottom: 60px;
 }
 
-.cont-stat h5 {
-    margin-bottom: 0;
-}
-
-.cont-stat h6,
 .cont-stat .col-md-4 p {
     margin: 0 1px;
     padding: 5px;
@@ -487,9 +481,6 @@ div.pagination-links li a {
     }
     .hom-why {
         margin-top: 50px;
-    }
-    .create-header h2 {
-        margin-bottom: 40px;
     }
     .create-header h4 {
         padding: 10px;

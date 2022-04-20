@@ -44,7 +44,7 @@ class Item_model extends CI_Model
     public function get_items_hint($hint=false)
     {
         if($hint){
-            $sql = "SELECT items.id, items.name, items.code, items.mes_unit, items.quantity, items.buying_price, items.selling_price, items.sellers_code, g.name as groupname FROM items INNER JOIN groups g ON g.id = items.group_id WHERE items.name LIKE '%" .
+            $sql = "SELECT items.id, items.name, items.code, items.mes_unit, items.quantity, items.buying_price, items.selling_price, items.sellers_code, g.name as groupname FROM items INNER JOIN groups g ON g.id = items.group_id WHERE items.code LIKE '%" .
             $this->db->escape_like_str($hint)."%' ESCAPE '!'";
                 $query = $this->db->query($sql);
                 if ($query->num_fields() > 0) {

@@ -47,10 +47,10 @@ function findItems() {
     <?php echo '<p class="alert alert-warning">' . $this->session->flashdata('info') . '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></p>'; ?>
     <?php endif;?>
     <div id="entry-data" class="row no-gutters">
-        <?php echo form_open('entry/credit/'.$entry['id']); ?>
+        <?php echo form_open('entry/change/'. $entry['id']); ?>
         <div class="d-flex flex-wrap">
             <div class="px-3 col-12 font-italic">
-                <h6>Unesi novi ili izmeni postojeći ulaz</h6>
+                <h6>Izmeni postojeći ulaz</h6>
             </div>
             <div class="col-sm-12 col-md-6 col-lg-4  my-2">
                 <?php if (form_error('date')) {
@@ -70,7 +70,7 @@ function findItems() {
                     placeholder="Naziv">
             </div>
             <div class="col-sm-12 col-md-12 col-lg-4 align-self-end text-center my-2">
-                <button id="create-entry-btn" class="mybutton btn" type="submit">Kreiraj/Izmeni</button>
+                <button id="create-entry-btn" class="mybutton btn" type="submit">Izmeni</button>
             </div>
         </div>
         <?php echo form_close(); ?>

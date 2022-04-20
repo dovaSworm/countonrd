@@ -3,10 +3,10 @@
         redirect('users/login');
     }    
 ?>
-<div class="create-header">
-    <h4 class="text-center my-1">Registracija novog korisnika</h4>
-</div>
 <div class="container create-wrapper">
+    <div class="create-header">
+        <h4 class="text-center my-1">Registracija novog korisnika</h4>
+    </div>
     <?php echo validation_errors(); ?>
 
     <?php echo form_open('users/register'); ?>

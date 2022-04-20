@@ -35,7 +35,7 @@ $(document).ready(function() {
         });
     });
 
-    // links.forEach(link => {
+    // links.forEach(link => {<?php echo base_url(); ?>items/edit/<?php echo $value['id']; ?>
     //     link.addEventListener("click", () => {
     //         navLinks.classList.toggle("open");
     //         links.forEach(link => {

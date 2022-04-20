@@ -36,7 +36,7 @@
 
     <nav>
         <div class="logo-holder">
-        <img  src="<?php echo base_url().'/assets/img/logo5.png' ;?>" alt="logo"> 
+        <img  src="<?php echo base_url().'assets/img/logo5.png' ;?>" alt="logo"> 
         </div>
         <div class="container p-0">
             <div id="loging" class="d-flex" style="color:white">
@@ -52,6 +52,8 @@
                         class="fas fa-user fa-sm"></i> Login</a>
                 <?php endif;?>
             </div>
+            <?php if (is_numeric($this->session->userdata('user_id'))): ;?>
+                
             <div class="hamburger">
                 <div class="wrapper">
                 <div class="line"></div>
@@ -105,11 +107,12 @@
                             <a href="<?php echo base_url(); ?>entry/view_all">Pogledaj sve</a>
                         </li>
                         <li>
-                            <a href="<?php echo base_url(); ?>entry/view">Novi ulaz</a>
+                            <a href="<?php echo base_url(); ?>entry/create_entry">Novi ulaz</a>
                         </li>
                     </ul>
                 </li>
             </ul>
+            <?php endif;?>
         </div>
     </nav>
     <main>

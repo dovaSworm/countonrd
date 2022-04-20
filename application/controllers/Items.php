@@ -14,6 +14,10 @@ class Items extends CI_Controller
 
     public function index($offset = 0)
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $this->load->library('pagination');
 
         $config['base_url'] = base_url() . 'items/index';
@@ -54,7 +58,10 @@ class Items extends CI_Controller
 
     public function create()
     {
-
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $groups['groups'] = $this->group_model->get_groups();
 
         $this->form_validation->set_rules('group-id', 'Group id', 'required|numeric');
@@ -98,6 +105,10 @@ class Items extends CI_Controller
 
     public function edit($id)
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         // $groups['groups'] = $this->group_model->get_groups();
         $naslov['title'] = 'Edit';
         $data['item'] = $this->item_model->get_one($id);
@@ -184,7 +195,7 @@ class Items extends CI_Controller
             $items = $this->item_model->get_items_hint($hint);
             $html ='<select name="item" id="item" class="form-control">';
             foreach ($items as $item) {
-                $html .= '<option value="' . $item['id'] . '">' . $item['name'] . '</option>';
+                $html .= '<option value="' . $item['id'] . '">' . $item['code'] . '</option>';
             }
             $html .='</select>';
             echo $html;
@@ -207,6 +218,10 @@ class Items extends CI_Controller
     }
     public function stat()
     {
+        $user = $this->session->userdata('user_id');
+        if (!is_numeric($user)) {
+            redirect('users/login');
+        }
         $this_month = date('m');
         $last_month = date('m', strtotime('now - 1 month'));
         $data['items'] = $this->item_model->get_items();
